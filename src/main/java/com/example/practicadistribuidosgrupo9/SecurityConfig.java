@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-@Configuration
-@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -20,13 +18,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticate")
-                .defaultSuccessURL("/", true)
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/login?error=true")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessURL("/login")
+                .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true);
     }
 }
-
