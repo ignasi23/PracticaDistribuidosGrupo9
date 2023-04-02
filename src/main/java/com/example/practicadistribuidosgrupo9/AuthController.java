@@ -40,4 +40,15 @@ public class AuthController {
         session.invalidate();
         return "redirect:/";
     }
+    @PostMapping("/register")
+    public String register(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String username, @RequestParam String password, HttpSession session) {
+        if (!users.containsKey(username)) {
+            users.put(username, password);
+            session.setAttribute("user", username);
+            return "redirect:/";
+        } else {
+            return "redirect:/login?registerError=true";
+        }
+    }
+
 }
