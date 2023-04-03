@@ -16,8 +16,8 @@ public class AuthController {
     public AuthController() {
         users = new HashMap<>();
         // Agregar usuarios de ejemplo
-        users.put("user1", "password1");
-        users.put("user2", "password2");
+        /*users.put("user1", "password1");
+        users.put("user2", "password2");*/
     }
 
     @GetMapping("/login")
@@ -27,8 +27,8 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public String authenticate(@RequestParam String username, @RequestParam String password, HttpSession session) {
-        if (users.containsKey(username) && users.get(username).equals(password)) {
-            session.setAttribute("user", username);
+        if (users.containsKey(username.toUpperCase()) && users.get(username.toUpperCase()).equals(password)) {
+            session.setAttribute("user", username.toUpperCase());
             return "redirect:/";
         } else {
             return "redirect:/login?error=true";
@@ -42,13 +42,12 @@ public class AuthController {
     }
     @PostMapping("/register")
     public String register(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String username, @RequestParam String password, HttpSession session) {
-        if (!users.containsKey(username)) {
-            users.put(username, password);
+        if (!users.containsKey(username.toUpperCase())) {
+            users.put(username.toUpperCase(), password);
             session.setAttribute("user", username);
             return "redirect:/";
         } else {
             return "redirect:/login?registerError=true";
         }
     }
-
 }
