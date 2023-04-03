@@ -38,7 +38,7 @@ public class RootController {
 
 
     }
-/*
+
     @GetMapping("/product1")
     public String product1(Model model) {
         return "/product1";
@@ -47,6 +47,6 @@ public class RootController {
     @GetMapping("/product2")
     public String product2(Model model) {
         return "/product2";
-    } */
+    }
 
 }
