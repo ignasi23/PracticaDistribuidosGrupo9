@@ -17,4 +17,26 @@ public class RootController {
         return "index";
     }
 
+    @GetMapping("/shop")
+    public String shop(Model model) {
+        return "shop";
+    }
+
+    @GetMapping("/about")
+    public String about(Model model) {
+        return "/about";
+    }
+
+    @GetMapping("/contact")
+    public String contact(Model model) {
+        return "/contact";
+    }
+
+    @GetMapping("/index")
+    public String index(Model model) {
+        return "/index";
+
+
+    }
+
 }
