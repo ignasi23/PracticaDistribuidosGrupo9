@@ -18,6 +18,7 @@ class Products {
     }
 
     // method to get the html representation to the product
+    // hay que hacer algo para que funcione el html
     public String getHTML() {
         String c = '\n <div class="producto">\n'
                 c= c+ '<img src="${this.imagen}" alt="${this.nombre}">\n '
