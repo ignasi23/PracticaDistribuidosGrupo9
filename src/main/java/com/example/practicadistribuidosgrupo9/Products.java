@@ -17,7 +17,7 @@ class Products {
         return  this.price.toFixed(2) + "€";
     }/*
 
-    // method to get the html representation to the product
+    // /method to get the html representation to the product
     // hay que hacer algo para que funcione el html
     /*public String getHTML() {
         String c = '\n <div class="producto">\n';
