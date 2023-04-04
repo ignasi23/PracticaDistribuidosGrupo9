@@ -8,24 +8,62 @@
     <link rel="stylesheet" href="assets/css/cart.css">
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="mb-4">Carrito de Compras</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="producto : ${productos}">
-            <td th:text="${producto.titulo}"></td>
-            <td th:text="${producto.precio}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <h4 class="mb-3">Total: <span th:text="${total}"></span> €</h4>
+<div class="container">
+    <div class="card">
+        <div class="row">
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col">
+                            <h4><b>Carrito de Compras</b></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row border-top border-bottom" th:each="producto, iterStat : ${productos}">
+                    <div class="row main align-items-center">
+                        <td><img th:src="@{${producto.imagen}}" alt="Imagen del producto" width="50" height="50"></td>
+                        <div class="col">
+                            <div class="row text-muted">Producto</div>
+                            <div class="row" th:text="${producto.titulo}"></div>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-danger" th:data-index="${iterStat.index}" onclick="removeFromCart(this)">Eliminar</button>
+                        </div>
+                        <div class="col text-right" th:text="${producto.precio}"></div>
+                    </div>
+                </div>
+                <div class="back-to-shop"><a href="#" th:href="@{/}">&leftarrow; Volver a la tienda</a></div>
+            </div>
+            <div class="col-md-4 summary">
+                <div>
+                    <h5><b>Resumen</b></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">Total</div>
+                    <div class="col text-right" th:text="${total}">€</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    function removeFromCart(buttonElement) {
+        var index = buttonElement.getAttribute('data-index');
+        fetch('/cart/' + index, {
+            method: 'DELETE'
+        })
+        .then(function(response) {
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert('Error al eliminar el producto del carrito');
+            }
+        });
+    }
+</script>
 </body>
 </html>
+
+
 
