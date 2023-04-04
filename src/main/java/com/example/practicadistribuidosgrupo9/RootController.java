@@ -58,4 +58,9 @@ public class RootController {
     public String profile(Model model) {
         return "/profile";
     }
+
+    @GetMapping("/checkout")
+    public String checkout(Model model) {
+        return "/checkout";
+    }
 }

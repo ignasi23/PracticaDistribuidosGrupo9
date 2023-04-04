@@ -41,7 +41,12 @@
                 <hr>
                 <div class="row">
                     <div class="col">Total</div>
-                    <div class="col text-right" th:text="${total}">€</div>
+                    <div class="col text-right cart-total" th:text="${total}">€</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a href="/checkout" class="btn btn-primary" id="checkout-btn">Proceder al pago</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,6 +66,12 @@
             }
         });
     }
+
+    function redirectToCheckout() {
+    let cartTotal = document.querySelector('.summary .cart-total').textContent;
+    let encodedTotal = encodeURIComponent(cartTotal);
+    window.location.href = 'checkout.html?total=' + encodedTotal;
+}
 </script>
 </body>
 </html>
