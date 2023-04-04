@@ -139,6 +139,45 @@ https://templatemo.com/tm-559-zay-shop
                 </div>
                 <div class="col-md-4">
                    <!-- <img src="assets/img/about-hero_02.png" alt="About Hero"> -->
+                    <script src="https://apis.google.com/js/platform.js"></script>
+                    <div id="player"></div>
+                    <script>
+
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '360',
+      width: '440',
+      videoId: 'bRmi_L2BmQI',
+      playerVars: {
+        'autoplay': 0 ,
+        'controls': 1,
+        'mute': 0
+
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    event.target.playVideo();
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.ENDED) {
+      event.target.playVideo();
+    }
+  }
+</script>
+
                 </div>
             </div>
         </div>
