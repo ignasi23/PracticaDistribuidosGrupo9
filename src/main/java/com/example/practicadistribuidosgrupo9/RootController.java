@@ -48,5 +48,8 @@ public class RootController {
     public String product2(Model model) {
         return "/product2";
     }
-
+    @GetMapping("/profile")
+    public String profile(Model model) {
+        return "/profile";
+    }
 }

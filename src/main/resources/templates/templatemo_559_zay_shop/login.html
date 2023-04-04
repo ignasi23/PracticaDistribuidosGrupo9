@@ -2,274 +2,290 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>NINP</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NINP</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/templatemo.css">
-  <link rel="stylesheet" href="assets/css/custom.css">
-  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="assets/css/estiloLogin.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/estiloLogin.css">
 
-  <!-- Load fonts style after rendering the layout styles -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 
 </head>
 
 <body>
 <!-- Start Top Nav -->
 <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
-  <div class="container text-light">
-    <div class="w-100 d-flex justify-content-between">
-      <div>
-        <i class="fa fa-envelope mx-2"></i>
-        <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@ninp.com</a>
-        <i class="fa fa-phone mx-2"></i>
-        <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
-      </div>
-      <div>
-        <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-        <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-        <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-        <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
-      </div>
+    <div class="container text-light">
+        <div class="w-100 d-flex justify-content-between">
+            <div>
+                <i class="fa fa-envelope mx-2"></i>
+                <a class="navbar-sm-brand text-light text-decoration-none"
+                   href="mailto:info@company.com">info@ninp.com</a>
+                <i class="fa fa-phone mx-2"></i>
+                <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+            </div>
+            <div>
+                <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i
+                        class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://www.instagram.com/" target="_blank"><i
+                        class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://twitter.com/" target="_blank"><i
+                        class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i
+                        class="fab fa-linkedin fa-sm fa-fw"></i></a>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
 <!-- Close Top Nav -->
 
 
 <!-- Header -->
 <nav class="navbar navbar-expand-lg navbar-light shadow">
-  <div class="container d-flex justify-content-between align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
 
-    <a class="navbar-brand text-success logo h1 align-self-center" th:href="@{/shop}">NINP</a>
-    </a>
+        <a class="navbar-brand text-success logo h1 align-self-center" th:href="@{/shop}">NINP</a>
+        </a>
 
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
-      <div class="flex-fill">
-        <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/index}">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/about}">Más</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/shop}">Comprar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/contact}">Contacto</a>
-          </li>
-        </ul>
-      </div>
-      <div class="navbar align-self-center d-flex">
-        <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-          <div class="input-group">
-            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-            <div class="input-group-text">
-              <i class="fa fa-fw fa-search"></i>
+        <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+             id="templatemo_main_nav">
+            <div class="flex-fill">
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/index}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/about}">Más</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/shop}">Comprar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contact}">Contacto</a>
+                    </li>
+                </ul>
             </div>
-          </div>
+            <div class="navbar align-self-center d-flex">
+                <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                        <div class="input-group-text">
+                            <i class="fa fa-fw fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+                <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
+                   data-bs-target="#templatemo_search">
+                    <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                </a>
+                <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+                </a>
+                <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                    <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                </a>
+            </div>
         </div>
-        <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-          <i class="fa fa-fw fa-search text-dark mr-2"></i>
-        </a>
-        <a class="nav-icon position-relative text-decoration-none" href="#">
-          <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-          <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
-        </a>
-        <a class="nav-icon position-relative text-decoration-none" href="#">
-          <i class="fa fa-fw fa-user text-dark mr-3"></i>
-          <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
-        </a>
-      </div>
-    </div>
 
-  </div>
+    </div>
 </nav>
 
 
 <div class="form">
 
-  <ul class="tab-group">
-    <li class="tab active"><a href="#signup">Sign Up</a></li>
-    <li class="tab"><a href="#login">Log In</a></li>
-  </ul>
+    <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+    </ul>
 
-  <div class="tab-content">
-    <div id="signup">
-      <h1>Sign Up for Free</h1>
+    <div class="tab-content">
+        <div id="signup">
+            <h1>Sign Up for Free</h1>
 
-      <form action="/register" method="post">
+            <form action="/register" method="post">
 
-        <div class="top-row">
-          <div class="field-wrap">
-            <label>
-              First Name<span class="req">*</span>
-            </label>
-            <input type="text" id="firstname_signup" name="firstName" required autocomplete="off" />
-          </div>
+                <div class="top-row">
+                    <div class="field-wrap">
+                        <label>
+                            First Name<span class="req">*</span>
+                        </label>
+                        <input type="text" id="firstname_signup" name="firstName" required autocomplete="off"/>
+                    </div>
 
-          <div class="field-wrap">
-            <label>
-              Last Name<span class="req">*</span>
-            </label>
-            <input type="text" id="lastname_signup" name="lastName" required autocomplete="off" />
-          </div>
+                    <div class="field-wrap">
+                        <label>
+                            Last Name<span class="req">*</span>
+                        </label>
+                        <input type="text" id="lastname_signup" name="lastName" required autocomplete="off"/>
+                    </div>
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Email Address<span class="req">*</span>
+                    </label>
+                    <!-- Signup form -->
+                    <input type="email" id="username_signup" name="email" required autocomplete="off"/>
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Set A Password<span class="req">*</span>
+                    </label>
+                    <input type="password" id="password_signup" name="password" required autocomplete="off"/>
+                </div>
+
+                <button type="submit" class="button button-block"/>
+                Get Started</button>
+
+            </form>
+
         </div>
 
-        <div class="field-wrap">
-          <label>
-            Email Address<span class="req">*</span>
-          </label>
-          <!-- Signup form -->
-          <input type="email" id="username_signup" name="email" required autocomplete="off" />
+        <div id="login">
+            <h1>Welcome Back!</h1>
+
+            <form action="/authenticate" method="post">
+
+                <div class="field-wrap">
+                    <label>
+                        Email Address<span class="req">*</span>
+                    </label>
+                    <!-- Login form -->
+                    <input type="text" id="username_login" name="email" required autocomplete="off"/>
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Password<span class="req">*</span>
+                    </label>
+                    <input type="password" id="password_login" name="password" required autocomplete="off"/>
+                </div>
+
+                <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                <button class="button button-block"/>
+                Log In</button>
+
+            </form>
+
         </div>
 
-        <div class="field-wrap">
-          <label>
-            Set A Password<span class="req">*</span>
-          </label>
-          <input type="password" id="password_signup" name="password" required autocomplete="off" />
-        </div>
-
-        <button type="submit" class="button button-block"/>Get Started</button>
-
-      </form>
-
-    </div>
-
-    <div id="login">
-      <h1>Welcome Back!</h1>
-
-      <form action="/authenticate" method="post">
-
-        <div class="field-wrap">
-          <label>
-            Email Address<span class="req">*</span>
-          </label>
-          <!-- Login form -->
-          <input type="text" id="username_login" name="email" required autocomplete="off" />
-        </div>
-
-        <div class="field-wrap">
-          <label>
-            Password<span class="req">*</span>
-          </label>
-          <input type="password" id="password_login" name="password" required autocomplete="off" />
-        </div>
-
-        <p class="forgot"><a href="#">Forgot Password?</a></p>
-
-        <button class="button button-block"/>Log In</button>
-
-      </form>
-
-    </div>
-
-  </div><!-- tab-content -->
+    </div><!-- tab-content -->
 
 </div>
 
 
-
 <!-- Start Footer -->
 <footer class="bg-dark" id="tempaltemo_footer">
-  <div class="container">
-    <div class="row">
-
-      <div class="col-md-4 pt-5">
-        <h2 class="h2 text-success border-bottom pb-3 border-light logo">ninp Shop</h2>
-        <ul class="list-unstyled text-light footer-link-list">
-          <li>
-            <i class="fas fa-map-marker-alt fa-fw"></i>
-            Calle Serrano, 25, Madrid
-          </li>
-          <li>
-            <i class="fa fa-phone fa-fw"></i>
-            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
-          </li>
-          <li>
-            <i class="fa fa-envelope fa-fw"></i>
-            <a class="text-decoration-none" href="mailto:info@company.com">info@ninp.com</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="col-md-4 pt-5">
-        <h2 class="h2 text-light border-bottom pb-3 border-light">Productos</h2>
-        <ul class="list-unstyled text-light footer-link-list">
-          <li><a class="text-decoration-none" href="#">Joyas de hombre</a></li>
-          <li><a class="text-decoration-none" href="#">Joyas de mujer</a></li>
-          <li><a class="text-decoration-none" href="#">Más venidos</a></li>
-          <li><a class="text-decoration-none" href="#">Accesorios de lujo</a></li>
-        </ul>
-      </div>
-
-      <div class="col-md-4 pt-5">
-        <h2 class="h2 text-light border-bottom pb-3 border-light">Más información</h2>
-        <ul class="list-unstyled text-light footer-link-list">
-          <li><a class="text-decoration-none" href="index">Inicio</a></li>
-          <li><a class="text-decoration-none" href="about">Sobre nosotros</a></li>
-          <li><a class="text-decoration-none" href="contact">Donde estamos</a></li>
-          <li><a class="text-decoration-none" href="contact">Contacta con nosotros</a></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="row text-light mb-4">
-      <div class="col-12 mb-3">
-        <div class="w-100 my-3 border-top border-light"></div>
-      </div>
-      <div class="col-auto me-auto">
-        <ul class="list-inline text-left footer-icons">
-          <li class="list-inline-item border border-light rounded-circle text-center">
-            <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
-          </li>
-          <li class="list-inline-item border border-light rounded-circle text-center">
-            <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
-          </li>
-          <li class="list-inline-item border border-light rounded-circle text-center">
-            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i class="fab fa-twitter fa-lg fa-fw"></i></a>
-          </li>
-          <li class="list-inline-item border border-light rounded-circle text-center">
-            <a class="text-light text-decoration-none" target="_blank" href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-auto">
-        <label class="sr-only" for="subscribeEmail">Dirección de correo</label>
-        <div class="input-group mb-2">
-          <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
-          <div class="input-group-text btn-success text-light">Subscribirse</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="w-100 bg-black py-3">
     <div class="container">
-      <div class="row pt-2">
-        <div class="col-12">
-          <p class="text-left text-light">
-            Copyright &copy; 2023 ninp
-            | Designed by <a rel="sponsored" href="https://urjc.es/" target="_blank">URJC</a>
-          </p>
+        <div class="row">
+
+            <div class="col-md-4 pt-5">
+                <h2 class="h2 text-success border-bottom pb-3 border-light logo">ninp Shop</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                    <li>
+                        <i class="fas fa-map-marker-alt fa-fw"></i>
+                        Calle Serrano, 25, Madrid
+                    </li>
+                    <li>
+                        <i class="fa fa-phone fa-fw"></i>
+                        <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope fa-fw"></i>
+                        <a class="text-decoration-none" href="mailto:info@company.com">info@ninp.com</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 pt-5">
+                <h2 class="h2 text-light border-bottom pb-3 border-light">Productos</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                    <li><a class="text-decoration-none" href="#">Joyas de hombre</a></li>
+                    <li><a class="text-decoration-none" href="#">Joyas de mujer</a></li>
+                    <li><a class="text-decoration-none" href="#">Más venidos</a></li>
+                    <li><a class="text-decoration-none" href="#">Accesorios de lujo</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 pt-5">
+                <h2 class="h2 text-light border-bottom pb-3 border-light">Más información</h2>
+                <ul class="list-unstyled text-light footer-link-list">
+                    <li><a class="text-decoration-none" href="index">Inicio</a></li>
+                    <li><a class="text-decoration-none" href="about">Sobre nosotros</a></li>
+                    <li><a class="text-decoration-none" href="contact">Donde estamos</a></li>
+                    <li><a class="text-decoration-none" href="contact">Contacta con nosotros</a></li>
+                </ul>
+            </div>
+
         </div>
-      </div>
+
+        <div class="row text-light mb-4">
+            <div class="col-12 mb-3">
+                <div class="w-100 my-3 border-top border-light"></div>
+            </div>
+            <div class="col-auto me-auto">
+                <ul class="list-inline text-left footer-icons">
+                    <li class="list-inline-item border border-light rounded-circle text-center">
+                        <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i
+                                class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                    </li>
+                    <li class="list-inline-item border border-light rounded-circle text-center">
+                        <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/"><i
+                                class="fab fa-instagram fa-lg fa-fw"></i></a>
+                    </li>
+                    <li class="list-inline-item border border-light rounded-circle text-center">
+                        <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i
+                                class="fab fa-twitter fa-lg fa-fw"></i></a>
+                    </li>
+                    <li class="list-inline-item border border-light rounded-circle text-center">
+                        <a class="text-light text-decoration-none" target="_blank" href="https://www.linkedin.com/"><i
+                                class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-auto">
+                <label class="sr-only" for="subscribeEmail">Dirección de correo</label>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control bg-dark border-light" id="subscribeEmail"
+                           placeholder="Email address">
+                    <div class="input-group-text btn-success text-light">Subscribirse</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <div class="w-100 bg-black py-3">
+        <div class="container">
+            <div class="row pt-2">
+                <div class="col-12">
+                    <p class="text-left text-light">
+                        Copyright &copy; 2023 ninp
+                        | Designed by <a rel="sponsored" href="https://urjc.es/" target="_blank">URJC</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </footer>
 <!-- End Footer -->
