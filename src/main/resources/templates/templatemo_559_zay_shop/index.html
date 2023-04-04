@@ -244,52 +244,62 @@ https://templatemo.com/tm-559-zay-shop
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Prductos destacados</h1>
+                    <h1 class="h1">Featured Product</h1>
                     <p>
-                        Los mejores productos de la temporada.
-                        Coleccion de <em>Plata de Ley</em> .
+                        Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident.
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="product1.html">
-                            <img src="assets/img/banner_img03_boy.JPG" class="card-img-top" alt="Men with silver rings">
+                        <a href="product1">
+                            <img src="assets/img/feature_prod_01.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
                                 <li class="text-muted text-right">$240.00</li>
                             </ul>
-                            <a href="product1.html" class="h2 text-decoration-none text-dark">Anillo Egipto</a>
+                            <a href="product1" class="h2 text-decoration-none text-dark">Gym Weight</a>
                             <p class="card-text">
-                                Precioso anillo de Plata de Ley con estampado egipcio en relieve.
-                                Disponible en todas las tallas.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
                             </p>
-                            <p class="text-muted">Reseñas (23)</p>
+                            <p class="text-muted">Reviews (24)</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
-                        <a href="product2">
-                            <img src="assets/img/product2_image01.JPG" class="card-img-top" alt="Moon Ring">
+                        <a href="shop-single.html">
+                            <img src="assets/img/feature_prod_02.jpg" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                             <ul class="list-unstyled d-flex justify-content-between">
-
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
                                 <li class="text-muted text-right">$480.00</li>
                             </ul>
-                            <a href="product2" class="h2 text-decoration-none text-dark">Anillo Luna</a>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Cloud Nike Shoes</a>
                             <p class="card-text">
-                                Sofisticado y espiritual anillo de luna en Plata de Ley, con diamantes y piedra lunar.
+                                Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.
                             </p>
-                            <p class="text-muted">Reviews (40)</p>
+                            <p class="text-muted">Reviews (48)</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card h-100">
                         <a href="shop-single.html">
@@ -419,6 +429,17 @@ https://templatemo.com/tm-559-zay-shop
     <script src="assets/js/custom.js"></script>
     <!-- End Script -->
     <script src="cart.js"></script>
+    <script>
+  window.addEventListener('load', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const firstName = urlParams.get('firstName');
+    const lastName = urlParams.get('lastName');
+
+    if (firstName && lastName) {
+      alert(`¡Bienvenido ${firstName} ${lastName}!`);
+    }
+  });
+</script>
 
 </body>
 
