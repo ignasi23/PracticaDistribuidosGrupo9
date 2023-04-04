@@ -25,5 +25,13 @@ public class CarritoService {
             .map(Producto::getPrecio)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    public void eliminarDelCarrito(int index) {
+        if (index >= 0 && index < carrito.size()) {
+            carrito.remove(index);
+        }
+    }
+
+
 }
 

@@ -15,17 +15,36 @@
         <tr>
             <th>Producto</th>
             <th>Precio</th>
+            <th>Acción</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="producto : ${productos}">
+        <tr th:each="producto, iterStat : ${productos}">
             <td th:text="${producto.titulo}"></td>
             <td th:text="${producto.precio}"></td>
+            <!-- Agrega esta línea para incluir el botón "eliminar" -->
+            <td><button class="btn btn-danger" th:data-index="${iterStat.index}" onclick="removeFromCart(this)">Eliminar</button></td>
         </tr>
         </tbody>
     </table>
     <h4 class="mb-3">Total: <span th:text="${total}"></span> €</h4>
+    <a href="javascript:history.back()" class="btn btn-secondary mb-3">Atrás</a>
 </div>
+<script>
+    function removeFromCart(buttonElement) {
+    var index = buttonElement.getAttribute('data-index');
+    fetch('/cart/' + index, {
+        method: 'DELETE'
+    })
+    .then(function(response) {
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert('Error al eliminar el producto del carrito');
+        }
+    });
+}
+</script>
 </body>
 </html>
 
