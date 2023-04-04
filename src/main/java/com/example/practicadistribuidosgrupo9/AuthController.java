@@ -16,13 +16,11 @@ import java.util.Map;
 
 @Controller
 public class AuthController {
-    private Map<String, String> users;
+    private Map<String, User> users;
 
     public AuthController() {
         users = new HashMap<>();
-        // Agregar usuarios de ejemplo
-        /*users.put("user1", "password1");
-        users.put("user2", "password2");*/
+
     }
 
     @GetMapping("/login")
@@ -32,10 +30,10 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public String authenticate(@RequestParam String email, @RequestParam String password, HttpSession session) {
-        String username = email.toUpperCase();
-        if (users.containsKey(username) && users.get(username).equals(password)) {
-            session.setAttribute("user", username);
-            return "redirect:/";
+        User user = users.get(email.toUpperCase());
+        if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("user", email.toUpperCase());
+            return "redirect:/?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName();
         } else {
             return "redirect:/login?error=true";
         }
@@ -51,7 +49,7 @@ public class AuthController {
     public String register(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, HttpSession session) {
         String username = email.toUpperCase();
         if (!users.containsKey(username)) {
-            users.put(username, password);
+            users.put(username.toUpperCase(), new User(firstName, lastName, password));
             session.setAttribute("user", username);
             return "redirect:/login";
         } else {
