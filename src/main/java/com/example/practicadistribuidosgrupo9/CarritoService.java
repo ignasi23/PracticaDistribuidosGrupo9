@@ -11,9 +11,9 @@ public class CarritoService {
 
     private List<Producto> carrito = new ArrayList<>();
 
-    public void agregarAlCarrito(String titulo, BigDecimal precio, int cantidad) {
+    public void agregarAlCarrito(String titulo, BigDecimal precio, String imagen, int cantidad) {
         for (int i = 0; i < cantidad; i++) {
-            carrito.add(new Producto(titulo, precio));
+            carrito.add(new Producto(titulo, precio, imagen));
         }
     }
 
@@ -21,9 +21,10 @@ public class CarritoService {
         return carrito;
     }
 
-    public BigDecimal getTotal() {return carrito.stream()
-            .map(Producto::getPrecio)
-            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    public BigDecimal getTotal() {
+        return carrito.stream()
+                .map(Producto::getPrecio)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public void eliminarDelCarrito(int index) {
@@ -31,7 +32,6 @@ public class CarritoService {
             carrito.remove(index);
         }
     }
-
-
 }
+
 
