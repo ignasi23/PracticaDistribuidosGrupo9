@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+
 @Controller
 public class CartController {
 
@@ -22,13 +24,15 @@ public class CartController {
 
     @PostMapping("/cart")
     public String addToCart(@RequestParam("product-title") String title,
+                            @RequestParam("product-price") String price,
                             @RequestParam("product-quanity") int quantity,
                             @RequestParam("submit") String submit) {
         if (submit.equals("addtocard")) {
-            carritoService.agregarAlCarrito(title, quantity);
+            carritoService.agregarAlCarrito(title, new BigDecimal(price), quantity);
         }
         return "redirect:/cart";
     }
 }
+
 
 
