@@ -7,7 +7,7 @@ public class OrderReport {
     private String userName;
     private String orderID;
     private String reportMsg;
-
+    private boolean reportSolved = false;
 
     public OrderReport(String userName, String orderID, String reportMsg) {
         this.userName = userName;
@@ -28,5 +28,11 @@ public class OrderReport {
         return reportMsg;
     }
 
+    public void setReportSolved(boolean b){
+        this.reportSolved = b;
+    }
+    public boolean getReportSolved(){
+        return this.reportSolved;
+    }
 
 }

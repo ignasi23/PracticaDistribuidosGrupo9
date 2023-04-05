@@ -38,6 +38,17 @@ public class OrderController {
             orderReports.add(orderReport);
         }
         // Devolver una respuesta al cliente
-        return "Ok";
+        return "Ok";    // Neman wtf
     }
+
+   /* @PostMapping("/solveReportOrder")
+    public String solveReportOrder(@CookieValue(name = "user", defaultValue = "") String user , @RequestBody JsonNode o) {
+        // Almacenar el pedido en el mapa
+        User currentUser = AuthController.users.get(user.toUpperCase());
+        if(currentUser != null){
+            orderReports.ge//get(o.get("orderID").asText()).setReportSolved(true);
+        }
+        // Devolver una respuesta al cliente
+        return "Ok";
+    }*/
 }

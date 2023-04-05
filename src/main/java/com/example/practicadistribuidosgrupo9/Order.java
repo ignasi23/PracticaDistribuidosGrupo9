@@ -12,6 +12,7 @@ public class Order {
     private String securityCode;
     private boolean reported = false;
 
+
     public Order(String orderID, String cardNumber, String cardHolder, String expiryDate, String securityCode, List<Producto> productos) {
         this.orderID = orderID;
         this.cardNumber = cardNumber;
@@ -71,5 +72,8 @@ public class Order {
 
     public void setReported(boolean b){
         this.reported = b;
+    }
+    public boolean getReported(){
+        return this.reported;
     }
 }

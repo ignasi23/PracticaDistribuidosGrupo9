@@ -58,7 +58,9 @@
           </thead>
           <tbody>
           <td th:text="${order.value.orderID}"></td>
-          <td><button th:id="fetchButton" class="myButtonClass" style="background-color: red; color: white;" type="button" th:onclick="report([[${order.value.orderID}]])">Report</button></td>
+          <td th:if="${!order.value.reported}"><button th:id="fetchButton" class="myButtonClass" style="background-color: red; color: white;" type="button" th:onclick="report([[${order.value.orderID}]])">Report</button></td>
+          <td th:if="${order.value.reported}"><th:text style="background-color: lightgray;">Esperando respuesta</th:text></td>
+
           <table class="table table-light">
             <tbody>
             <tr th:each="product: ${order.value.productos}">
@@ -87,6 +89,7 @@
           <td th:text="${report.userName}"></td>
           <td th:text="${report.orderID}"></td>
           <td th:text="${report.reportMsg}"></td>
+
         </tr>
       </tbody>
     </table>
@@ -151,6 +154,26 @@
   }
   function closeDialog() {
     document.getElementById("myDialog").style.display = "none";
+  }
+
+  function solveReport(orderId) {
+
+    let orderData = {
+      orderID: orderId,
+    };
+    fetch('/api/solveReportOrder', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderData),
+    }).then((response) => response.json()).then((data) => {
+      console.log('Pedido creado con éxito:', data);
+      // Aquí puedes agregar la lógica para mostrar un mensaje de éxito al usuario y/o redirigir a otra página
+    }).catch((error) => {
+      console.error('Error:', error);
+    });
+
   }
 </script>
 </body>
