@@ -35,10 +35,15 @@ public class RootController {
     @GetMapping("/index")
     public String index(Model model) {
         return "/index";
-
-
     }
-
+    @GetMapping("/women")
+    public String women(Model model) {
+        return "/women";
+    }
+    @GetMapping("/men")
+    public String men(Model model) {
+        return "/men";
+    }
     @GetMapping("/product1")
     public String product1(Model model) {
         return "/product1";
