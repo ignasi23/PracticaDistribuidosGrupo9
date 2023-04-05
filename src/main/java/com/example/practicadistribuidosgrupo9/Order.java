@@ -2,7 +2,6 @@ package com.example.practicadistribuidosgrupo9;
 
 public class Order {
     private String orderID;
-    private String cartTotal;
     private String cardNumber;
     private String cardHolder;
     private String expiryDate;
@@ -14,14 +13,6 @@ public class Order {
 
     public void setOrderID(String orderID) {
         this.orderID = orderID;
-    }
-
-    public String getCartTotal() {
-        return cartTotal;
-    }
-
-    public void setCartTotal(String cartTotal) {
-        this.cartTotal = cartTotal;
     }
 
     public String getCardNumber() {
