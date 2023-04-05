@@ -1,4 +1,3 @@
-
 $(function(){
 
   var cards = [{
@@ -121,51 +120,50 @@ $(function(){
       $(".seccode").css("color", "var(--text-color)");
   });
 
-    let orders = new Map(); // Este objeto almacenará los pedidos
 
-    let orderCounter = 1;
+  let orders = new Map(); // Este objeto almacenará los pedidos
 
-    function processPayment() {
+  let orderCounter = 1;
+
+  function processPayment() {
       // Aquí puedes agregar la lógica para validar los datos ingresados por el usuario (número de tarjeta, fecha de vencimiento, etc.)
 
       let cardNumber = $('.number').val();
-      let cardHolder = $('.inputname').val();
-      let expiryDate = $('.expire').val();
-      let securityCode = $('.ccv').val();
-      let cartTotal = $('#cart-total').val();
+          let cardHolder = $('.inputname').val();
+          let expiryDate = $('.expire').val();
+          let securityCode = $('.ccv').val();
+          let cartTotal = "500"; // Aquí establece el valor deseado para el total del carrito
 
        if (cartTotal && cardNumber && cardHolder && expiryDate && securityCode) {
-              let orderData = {
-                          orderID: orderID,
-                          cartTotal: cartTotal,
-                          cardNumber: cardNumber,
-                          cardHolder: cardHolder,
-                          expiryDate: expiryDate,
-                          securityCode: securityCode
-                      };
-        fetch('/api/orders', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(orderData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Pedido creado con éxito:', data);
-            // Aquí puedes agregar la lógica para mostrar un mensaje de éxito al usuario y/o redirigir a otra página
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    } else {
-        console.log('Por favor, completa todos los campos.');
-      }
-    }
+             let orderData = {
+               orderID: orderCounter.toString(),
+               cartTotal: cartTotal,
+               cardNumber: cardNumber,
+               cardHolder: cardHolder,
+               expiryDate: expiryDate,
+               securityCode: securityCode,
+             };
+             fetch('/api/orders', {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+               },
+               body: JSON.stringify(orderData),
+             })
+               .then((response) => response.json())
+               .then((data) => {
+                 console.log('Pedido creado con éxito:', data);
+                 // Aquí puedes agregar la lógica para mostrar un mensaje de éxito al usuario y/o redirigir a otra página
+               })
+               .catch((error) => {
+                 console.error('Error:', error);
+               });
+           } else {
+             console.log('Por favor, completa todos los campos.');
+           }
+         }
 
-    $('.buy').on('click', processPayment);
-
-
+         $(document).on('click', '.buy', processPayment);
   //Date expire input
   $(".expire").keypress(function(event){
     if(event.charCode >= 48 && event.charCode <= 57){
