@@ -125,6 +125,10 @@ $(function(){
 
   let orderCounter = 1;
 
+  function generateRandomID() {
+        return Math.random().toString(36).substr(2, 9);
+  }
+
   function processPayment() {
       // Aquí puedes agregar la lógica para validar los datos ingresados por el usuario (número de tarjeta, fecha de vencimiento, etc.)
 
@@ -132,12 +136,10 @@ $(function(){
           let cardHolder = $('.inputname').val();
           let expiryDate = $('.expire').val();
           let securityCode = $('.ccv').val();
-          let cartTotal = "500"; // Aquí establece el valor deseado para el total del carrito
 
-       if (cartTotal && cardNumber && cardHolder && expiryDate && securityCode) {
+       if (cardNumber && cardHolder && expiryDate && securityCode) {
              let orderData = {
-               orderID: orderCounter.toString(),
-               cartTotal: cartTotal,
+               orderID: generateRandomID(),
                cardNumber: cardNumber,
                cardHolder: cardHolder,
                expiryDate: expiryDate,
