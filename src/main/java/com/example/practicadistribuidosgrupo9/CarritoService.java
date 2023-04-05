@@ -11,6 +11,9 @@ public class CarritoService {
 
     private List<Producto> carrito = new ArrayList<>();
 
+    public CarritoService() {
+    }
+
     public void agregarAlCarrito(String titulo, BigDecimal precio, String imagen, int cantidad) {
         for (int i = 0; i < cantidad; i++) {
             carrito.add(new Producto(titulo, precio, imagen));
@@ -31,6 +34,10 @@ public class CarritoService {
         if (index >= 0 && index < carrito.size()) {
             carrito.remove(index);
         }
+    }
+
+    public void eliminarTodoCarrito() {
+        carrito.clear();
     }
 }
 

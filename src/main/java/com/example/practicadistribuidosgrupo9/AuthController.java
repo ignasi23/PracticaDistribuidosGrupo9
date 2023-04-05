@@ -1,27 +1,26 @@
 package com.example.practicadistribuidosgrupo9;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
-
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class AuthController {
-    private Map<String, User> users;
+    public static Map<String, User> users;
 
     public AuthController() {
         users = new HashMap<>();
@@ -98,9 +97,17 @@ public class AuthController {
             model.addAttribute("firstName", currentUser.getFirstName());
             model.addAttribute("lastName", currentUser.getLastName());
             model.addAttribute("userEmail", user);
-            if(currentUser.getAdminRole()) model.addAttribute("adminRole", true);
+            model.addAttribute("userOrders", currentUser.getOrders());
+            if(currentUser.getAdminRole()) {
+                model.addAttribute("adminRole", true);
+                model.addAttribute("reports", OrderController.orderReports);
+
+            }
+
             return "profile";
         }
     }
+
+
 
 }

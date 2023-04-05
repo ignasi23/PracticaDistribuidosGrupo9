@@ -5,19 +5,99 @@
   <title>CodePen - II just another Css tabs (:checked)</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
   <link rel="stylesheet" href="assets/css/profile.css">
+  <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/templatemo.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 </head>
 <body>
+<!-- Start Top Nav -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+  <div class="container text-light">
+    <div class="w-100 d-flex justify-content-between">
+      <div>
+        <i class="fa fa-envelope mx-2"></i>
+        <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">info@ninp.com</a>
+        <i class="fa fa-phone mx-2"></i>
+        <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+      </div>
+      <div>
+        <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+        <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+        <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+        <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Close Top Nav -->
+
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+  <div class="container d-flex justify-content-between align-items-center">
+
+    <a class="navbar-brand text-success logo h1 align-self-center" th:href="@{/shop}">NINP</a>
+    </a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+      <div class="flex-fill">
+        <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/index}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/about}">Más</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/shop}">Comprar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/contact}">Contacto</a>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar align-self-center d-flex">
+        <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+          <div class="input-group">
+            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+            <div class="input-group-text">
+              <i class="fa fa-fw fa-search"></i>
+            </div>
+          </div>
+        </div>
+        <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+          <i class="fa fa-fw fa-search text-dark mr-2"></i>
+        </a>
+        <a class="nav-icon position-relative text-decoration-none" href="#">
+          <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+          <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+        </a>
+        <a class="nav-icon position-relative text-decoration-none" href="#">
+          <i class="fa fa-fw fa-user text-dark mr-3"></i>
+          <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</nav>
 <!-- partial:index.partial.html -->
 <section>
 <input type="radio" id="profile" value="1" name="tractor" checked='checked' />    
-<input type="radio" id="settings" value="2" name="tractor" />      
+<input type="radio" id="settings" value="2" name="tractor" />
 <input type="radio" id="posts" value="3" name="tractor" />
-  
+
   <nav>   
   <label for="profile" class='fa fa-user'></label>
-  <label for="settings" class='fa fa-film'></label>
+  <label for="settings" class='fa fa-suitcase'></label>
   <label for="posts" th:if="${adminRole}" class='fa fa-bug'></label>
   </nav>
   
@@ -28,23 +108,49 @@
     <h2 class="text-center mt-2">
     <b th:text="Email +': ' + ${userEmail}"></b>
     </h2>
+  //AQUI
+  </article>
 
-  </article>
-  
   <article class='dos fa fa-wrench'>
-    <p>Si hay algún fenómeno en la web que sea lo más parecido a las setas eso son los blogs, cursos y enseñanzas web. Todo lo relativo a la divulgación, de cualquier materia o parcela del conocimiento humano, angelical o mefistofélico, tiene su oferta, sus "maestros" y sus cocinillas visionarios.</p>
+    <table class="table table-light">
+      <tbody>
+      <tr th:each="order: ${userOrders}">
+        <table class="table table-light">
+          <thead>
+          <th>Order Id</th>
+          </thead>
+          <tbody>
+          <td th:text="${order.value.orderID}"></td>
+          <td><button th:id="fetchButton" class="myButtonClass" style="background-color: red; color: white;" type="button" th:onclick="report([[${order.value.orderID}]])">Report</button></td>
+          <table class="table table-light">
+            <tbody>
+            <tr th:each="product: ${order.value.productos}">
+              <td> <img th:src="${product.imagen}" alt="Imagen del producto" width="50" height="50"></td>
+              <td th:text="${product.titulo}"></td>
+              <td th:text="${product.precio}"></td>
+            </tr>
+            </tbody>
+          </table>
+          </tbody>
+        </table>
+      </tr>
+      </tbody>
+    </table>
+  </article>
+
+  <article class='tres fa fa-beer'>
+    <table class="table table-light">
+      <tbody>
+        <tr th:each="report: ${reports}">
+          <td th:text="${report.userName}"></td>
+          <td th:text="${report.orderID}"></td>
+          <td th:text="${report.reportMsg}"></td>
+        </tr>
+      </tbody>
+    </table>
   </article>
   
-  <article class='tres fa fa-beer'>
-    <ol>
-      <li>Dimensionado de imágenes y objetos en CSS</li>
-      <li>Evita pulsaciones no deseadas al hacer scroll</li>
-      <li>¿Qué es CSS?</li>
-      <li>CSS Style Attributes. La especificación</li>
-      <li>Múltiples labels por cada input </li>
-      <li>Sintaxis de Css y Glosario de términos</li>
-    </ol>
-  </article>
+
 
   <article class='cuatro fa fa-copy'>
     <dl>
@@ -56,5 +162,46 @@
   </article>
 </section>
 
+<div id="popup" style="display: none;">
+  <h2>Enter your message:</h2>
+  <input type="text" id="message-input">
+  <button id="saveMessageButton">Save</button>
+</div>
+
+<th:block th:replace="footer.html :: footer" />
+<!-- End Footer -->
+<script src="assets/js/jquery-1.11.0.min.js"></script>
+<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/templatemo.js"></script>
+<script src="assets/js/custom.js"></script>
+<script>
+
+  function report(orderId) {
+    var popup = document.getElementById("popup");
+    popup.style.display = "block";
+    var saveMessageButton = document.getElementById("saveMessageButton").onclick = function() {
+      var message = document.getElementById("message-input").value;
+      var popup = document.getElementById("popup");
+      popup.style.display = "none";
+      let orderData = {
+        orderID: orderId,
+        reportMsg: message,
+      };
+      fetch('/api/reportOrder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      }).then((response) => response.json()).then((data) => {
+        console.log('Pedido creado con éxito:', data);
+        // Aquí puedes agregar la lógica para mostrar un mensaje de éxito al usuario y/o redirigir a otra página
+      }).catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+  }
+</script>
 </body>
 </html>

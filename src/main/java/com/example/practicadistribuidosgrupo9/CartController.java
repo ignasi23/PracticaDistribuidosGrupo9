@@ -25,17 +25,22 @@ public class CartController {
                             @RequestParam("product-price") String price,
                             @RequestParam("product-quanity") int quantity,
                             @RequestParam("product-image") String image,
-                            @RequestParam("submit") String submit) {
+                            @RequestParam("submit") String submit,
+                            @CookieValue(name = "user", defaultValue = "") String user) {
+        User currentUser = AuthController.users.get(user.toUpperCase());
         if (submit.equals("addtocard")) {
             carritoService.agregarAlCarrito(title, new BigDecimal(price), image, quantity);
+            currentUser.agregarAlCarrito(title, new BigDecimal(price), image, quantity);
         }
         return "redirect:/cart";
     }
 
     @DeleteMapping("/cart/{index}")
     @ResponseBody
-    public ResponseEntity<Void> removeFromCart(@PathVariable("index") int index) {
+    public ResponseEntity<Void> removeFromCart(@PathVariable("index") int index, @CookieValue(name = "user", defaultValue = "") String user) {
+        User currentUser = AuthController.users.get(user.toUpperCase());
         carritoService.eliminarDelCarrito(index);
+        currentUser.eliminarDelCarrito(index);
         return ResponseEntity.noContent().build();
     }
 }
