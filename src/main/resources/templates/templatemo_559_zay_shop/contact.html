@@ -131,7 +131,7 @@
     </div>
 
     <!-- Start Map -->
-    <head>
+   <!-- <head>
         <title>Mapa de Google Maps</title>
         <meta charset="utf-8">
         <style>
@@ -167,7 +167,90 @@
             });
         }
     </script>
+    </body> -->
+    <head>
+        <title>Mapa de Google Maps</title>
+        <meta charset="utf-8">
+        <style>
+        #map {
+            height: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    </head>
+    <body>
+    <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA5j9oyEI9WroPcSoyG84HnGqQJvOEs6o&callback=initMap" async defer></script>
+
+    <script>
+        function initMap() {
+            // Coordenadas de la ubicación del marcador
+            var location = {lat: 40.406047, lng: -3.610275};
+
+            // Crear un nuevo mapa
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: location
+            });
+
+            // Crear un marcador y agregarlo al mapa
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: "Mi marcador"
+            });
+
+            // API REST
+            const apiBaseUrl = '/api';
+
+            function getMarkers() {
+                return fetch(apiBaseUrl + '/markers')
+                    .then(response => response.json())
+                    .catch(error => console.error(error));
+            }
+
+            function addMarker(marker) {
+                return fetch(apiBaseUrl + '/markers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(marker)
+                })
+                .then(response => response.json())
+                .catch(error => console.error(error));
+            }
+
+            function deleteMarker(markerId) {
+                return fetch(apiBaseUrl + '/markers/' + markerId, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .catch(error => console.error(error));
+            }
+
+            function updateMarker(markerId, marker) {
+                return fetch(apiBaseUrl + '/markers/' + markerId, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(marker)
+                })
+                .then(response => response.json())
+                .catch(error => console.error(error));
+            }
+
+            // Ejemplos de uso de la API REST
+            getMarkers().then(markers => console.log(markers));
+            addMarker({ lat: 40.406047, lng: -3.610275, title: "Nuevo marcador" });
+            deleteMarker(1);
+            updateMarker(2, { lat: 40.406047, lng: -3.610275, title: "Marcador actualizado" });
+        }
+    </script>
     </body>
+
     <!-- Ena Map -->
 
     <!-- Start Contact -->
