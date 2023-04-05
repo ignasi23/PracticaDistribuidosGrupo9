@@ -138,7 +138,7 @@ https://templatemo.com/tm-559-zay-shop
                 </div>
                 <div class="col-md-4">
                    <!-- <img src="assets/img/about-hero_02.png" alt="About Hero"> -->
-                    <script src="https://apis.google.com/js/platform.js"></script>
+                   <!-- <script src="https://apis.google.com/js/platform.js"></script>
                     <div id="player"></div>
                     <script>
 
@@ -175,6 +175,87 @@ https://templatemo.com/tm-559-zay-shop
       event.target.playVideo();
     }
   }
+</script>-->
+                    <script src="https://www.youtube.com/iframe_api"></script>
+
+                    <!-- Contenedor del reproductor de video -->
+                    <div id="player"></div>
+
+                    <script>
+
+// Crear el objeto reproductor de video
+var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '360',
+    width: '440',
+    videoId: 'bRmi_L2BmQI',
+    playerVars: {
+      'autoplay': 0,
+      'controls': 1,
+      'mute': 0
+    }
+  });
+}
+
+// Manejar la reproducción del video desde la API REST
+function playVideo() {
+  player.playVideo();
+}
+
+function pauseVideo() {
+  player.pauseVideo();
+}
+
+function stopVideo() {
+  player.stopVideo();
+}
+
+// Definir las rutas de la API REST
+const express = require('express');
+const app = express();
+
+// Todos las URLs de la API REST comenzarán con /api para diferenciarse de las páginas de la web.
+app.use('/api', express.json());
+
+// Manejar el método GET para obtener información del video
+app.get('/api/video', (req, res) => {
+  res.json({
+    videoId: player.getVideoData().video_id,
+    duration: player.getDuration(),
+    currentTime: player.getCurrentTime(),
+    isPlaying: player.getPlayerState() === YT.PlayerState.PLAYING
+  });
+});
+
+// Manejar el método POST para establecer el ID del video
+app.post('/api/video', (req, res) => {
+  const { videoId } = req.body;
+  player.loadVideoById(videoId);
+  res.sendStatus(200);
+});
+
+// Manejar el método PUT para modificar el estado del reproductor
+app.put('/api/video', (req, res) => {
+  const { action } = req.body;
+  switch (action) {
+    case 'play':
+      playVideo();
+      break;
+    case 'pause':
+      pauseVideo();
+      break;
+    case 'stop':
+      stopVideo();
+      break;
+    default:
+      break;
+  }
+  res.sendStatus(200);
+});
+
+
+
 </script>
 
                 </div>
@@ -425,6 +506,7 @@ https://templatemo.com/tm-559-zay-shop
         </div>
 
     </footer>
+
     <!-- End Footer -->
 
     <!-- Start Script -->
