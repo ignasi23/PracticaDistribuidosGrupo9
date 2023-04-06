@@ -16,11 +16,11 @@
 </head>
 <body>
 <!-- Start Top  -->
-<th:block th:replace="nav.html :: nav" />
+<block th:replace="nav.html :: nav" />
 <!-- Close Top  -->
-</body>
+</body> <!-- no se si este body sobra COMPROBAR  -->
 
-<!-- Header -->
+
 
 <!-- partial:index.partial.html -->
 <section>
@@ -42,7 +42,7 @@
     <b th:text="Email +': ' + ${userEmail}"></b>
     </h2>
     <h2>
-      <button onclick="window.location.href='/logout';">Logout</button>
+      <button onclick="window.location.href='/logout';">Cerrar Sesión</button>
     </h2>
 
 
@@ -113,11 +113,12 @@
       <label for="userInput">Explica tu reporte:</label>
     <input type="text" id="userInput">
     <br>
-    <button id="saveMessageButton">Save</button>
-    <button onclick="closeDialog()">Cancel</button>
+    <button id="saveMessageButton">Guardar</button>
+    <button onclick="closeDialog()">Cancelar</button>
   </div>
 </div>
 
+<!-- Start Footer -->
 <th:block th:replace="footer.html :: footer" />
 <!-- End Footer -->
 <script src="assets/js/jquery-1.11.0.min.js"></script>
