@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Respuestas</title>
+    <link rel="stylesheet" href="assets/css/response.css">
+</head>
+<body>
+<h1>Respuestas</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Asunto</th>
+        <th>Mensaje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="response : ${responses}">
+        <td th:text="${response.name}"></td>
+        <td th:text="${response.email}"></td>
+        <td th:text="${response.subject}"></td>
+        <td th:text="${response.message}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
