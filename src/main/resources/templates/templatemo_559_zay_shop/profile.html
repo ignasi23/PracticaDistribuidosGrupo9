@@ -16,7 +16,7 @@
 </head>
 <body>
 <!-- Start Top  -->
-<block th:replace="nav.html :: nav" />
+<div th:replace="nav.html :: nav"></div>
 <!-- Close Top  -->
 </body> <!-- no se si este body sobra COMPROBAR  -->
 
@@ -28,10 +28,10 @@
 <input type="radio" id="settings" value="2" name="tractor" />
 <input type="radio" id="posts" value="3" name="tractor" />
 
-  <nav>   
-  <label for="profile" class='fa fa-user'></label>
-  <label for="settings" class='fa fa-suitcase'></label>
-  <label for="posts" th:if="${adminRole}" class='fa fa-bug'></label>
+  <nav class="miMenu">
+    <label for="profile" class='fa fa-user'></label>
+    <label for="settings" class='fa fa-suitcase'></label>
+    <label for="posts" th:if="${adminRole}" class='fa fa-bug'></label>
   </nav>
   
   <article class='uno'>
@@ -97,7 +97,7 @@
       </tbody>
     </table>
   </article>
-  
+
 
 
   <article class='cuatro fa fa-copy'>
@@ -122,7 +122,8 @@
 </div>
 
 <!-- Start Footer -->
-<th:block th:replace="footer.html :: footer" />
+<div th:replace="footer.html :: footer"></div>
+
 <!-- End Footer -->
 <script src="assets/js/jquery-1.11.0.min.js"></script>
 <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
