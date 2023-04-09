@@ -160,7 +160,7 @@ $(function(){
                .catch((error) => {
                  console.error('Error:', error);
                });
-           // Redireccionar a otro HTML
+           // Redireccionar a otro HTML.
            window.location.href = "/index";
 
            // Mostrar un mensaje de éxito
