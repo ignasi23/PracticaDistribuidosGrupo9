@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+
   <title>CodePen - II just another Css tabs (:checked)</title>
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
   <link rel="stylesheet" href="assets/css/profile.css">
   <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
@@ -10,14 +12,15 @@
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/templatemo.css">
   <link rel="stylesheet" href="assets/css/custom.css">
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 </head>
 <body>
 <!-- Start Top  -->
-<th:block th:replace="nav.html :: nav" />
+<th:block th:replace="~{nav.html :: nav}" />
+
 <!-- Close Top  -->
 <div class="page1"> <!-- Contenedor agregado -->
 
@@ -111,7 +114,7 @@
 </div>
 </div>
 <!-- Start Footer -->
-<div th:replace="footer.html :: footer"></div>
+<th:block th:replace="~{footer.html :: footer}" />
 <!-- End Footer -->
 <script src="assets/js/jquery-1.11.0.min.js"></script>
 <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
