@@ -1,22 +1,22 @@
 @import url(https://fonts.googleapis.com/css?family=Dosis:600,200|Great+Vibes);
-*,
-*:after,
-*:before {
+.page1 *,
+.page1 *:after,
+.page1 *:before {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
 
-* {
+.page1 * {
 	margin: 0;
 	padding: 0;
 	border: 0 none;
 	position: relative;
 }
-[class="fa"]:before {
+.page1 [class="fa"]:before {
 	font-family: "fontawesome", sans-serif;
 }
 
-html:not(#nav) {
+.page1 html:not(#nav) {
 	background: #f5f5f5;
 	width: 100%;
 	height: 100%;
@@ -25,7 +25,7 @@ html:not(#nav) {
 	color: #fff;
 }
 
-section {
+.page1 section {
 	background: #31a66c;
 	width: 80vw;
 	max-width: 40rem;
@@ -34,7 +34,7 @@ section {
 	margin: 4rem auto;
 	box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
 }
-article {
+.page1 article {
 	position: absolute;
 	left: 0;
 	top: 5rem;
@@ -47,7 +47,7 @@ article {
 	transform-origin: center right;
 	transition-delay: 0.1s;
 }
-article:before {
+.page1 article:before {
 	color: rgba(0, 0, 0, 0.2);
 	font-size: 4rem;
 	font-weight: 100;
@@ -55,16 +55,16 @@ article:before {
 	bottom: 1rem;
 	right: 1rem;
 }
-h2 {
+.page1 h2 {
 	font-size: 2.5rem;
 	font-weight: 600;
 	text-align: center;
 	color: rgba(0, 0, 0, 0.6);
 }
-body > h2 {
+.page1 body > h2 {
 	height: auto;
 }
-h2 img {
+.page1 h2 img {
 	width: 120px;
 	height: auto;
 	background: #f9f9f9;
@@ -75,34 +75,34 @@ h2 img {
 	margin: 0 auto;
 	box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
 }
-h2 span {
+.page1 h2 span {
 	font-family: Great Vibes;
 	font-weight: 400;
 	display: block;
 	margin-bottom: 1rem;
 }
 
-p,
-dl,
-ol {
+.page1 p,
+.page1 dl,
+.page1 ol {
 	line-height: 1.5;
 	font-size: 1.3rem;
 }
-ol li {
+.page1 ol li {
 	margin: 0 0 0.5rem 1rem;
 }
-dt {
+.page1 dt {
 	font-size: 1.6rem;
 	font-weight: 600;
 	text-indent: 1.5rem;
 }
-.miMenu {
+.page1 .miMenu {
 	background: #fff;
 	width: 100%;
 	height: 5rem;
 	box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
 }
-.miMenu::after {
+.page1 .miMenu::after {
 	content: "";
 	width: 25%;
 	height: 5rem;
@@ -110,10 +110,10 @@ dt {
 	position: absolute;
 	transition: 0.5s;
 }
-input {
+.page1 input {
 	display: none;
 }
-label {
+.page1 label {
 	width: 25%;
 	float: left;
 	color: #bee3d1;
@@ -122,56 +122,56 @@ label {
 	transition: 0.5s;
 	z-index: 2;
 }
-button {
+.page1 button {
 	background-color: #31a66c;
 	color: rgba(0, 0, 0, 0.6);
 }
-label:hover {
+.page1 label:hover {
 	color: #1e6743;
 }
-label:before {
+.page1 label:before {
 	display: block;
 	font-size: 3rem;
 	line-height: 5rem;
 	z-index: 2;
 }
-#profile:checked ~ nav [for="profile"],
-#settings:checked ~ nav [for="settings"],
-#posts:checked ~ nav [for="posts"],
-#books:checked ~ nav [for="books"] {
+.page1 #profile:checked ~ nav [for="profile"],
+.page1 #settings:checked ~ nav [for="settings"],
+.page1 #posts:checked ~ nav [for="posts"],
+.page1 #books:checked ~ nav [for="books"] {
 	color: #1e6743;
 	font-weight: 600;
 }
-#settings:checked ~ nav [for="settings"] {
+.page1 #settings:checked ~ nav [for="settings"] {
 }
-#profile:checked ~ nav [for="profile"] {
+.page1 #profile:checked ~ nav [for="profile"] {
 }
 
-#profile:checked ~ nav::after {
+.page1 #profile:checked ~ nav::after {
 	left: 0;
 }
-#settings:checked ~ nav::after {
+.page1 #settings:checked ~ nav::after {
 	left: 25%;
 	border-top: 0 none;
 }
-#posts:checked ~ nav::after {
+.page1 #posts:checked ~ nav::after {
 	left: 50%;
 }
-#books:checked ~ nav::after {
+.page1 #books:checked ~ nav::after {
 	left: 75%;
 }
 
-#profile:checked ~ .uno,
-#settings:checked ~ .dos,
-#posts:checked ~ .tres,
-#books:checked ~ .cuatro {
+.page1 #profile:checked ~ .uno,
+.page1 #settings:checked ~ .dos,
+.page1 #posts:checked ~ .tres,
+.page1 #books:checked ~ .cuatro {
 	display: block;
 	transform: scale(1);
 	transition-delay: 0.5s;
 }
-a {
+.page1 a {
 	color: rgba(0, 0, 0, 0.4);
 }
-a:hover {
+.page1 a:hover {
 	color: rgba(0, 0, 0, 0.2);
 }

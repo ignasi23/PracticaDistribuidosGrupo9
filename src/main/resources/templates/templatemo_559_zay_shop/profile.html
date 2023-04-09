@@ -10,16 +10,16 @@
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/templatemo.css">
   <link rel="stylesheet" href="assets/css/custom.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 </head>
 <body>
 <!-- Start Top  -->
-<div th:replace="nav.html :: nav"></div>
+<th:block th:replace="nav.html :: nav" />
 <!-- Close Top  -->
-</body> <!-- no se si este body sobra COMPROBAR  -->
-
+<div class="page1"> <!-- Contenedor agregado -->
 
 
 <!-- partial:index.partial.html -->
@@ -109,7 +109,7 @@
     <button onclick="closeDialog()">Cancelar</button>
   </div>
 </div>
-
+</div>
 <!-- Start Footer -->
 <div th:replace="footer.html :: footer"></div>
 <!-- End Footer -->
