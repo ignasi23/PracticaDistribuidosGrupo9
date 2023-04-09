@@ -160,6 +160,13 @@ $(function(){
                .catch((error) => {
                  console.error('Error:', error);
                });
+         document.getElementById("cart-total").addEventListener("click", function() {
+           // Redireccionar a otro HTML
+           window.location.href = "/index";
+
+           // Mostrar un mensaje de éxito
+           alert("Pedido Realizado con Éxito");
+         });
            } else {
              console.log('Por favor, completa todos los campos.');
            }
@@ -197,4 +204,5 @@ $(function(){
   }).focus(function(){
     $(".date_value").css("color", "white");
   });
+
 });
