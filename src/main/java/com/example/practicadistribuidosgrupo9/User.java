@@ -11,7 +11,7 @@ public class User {
     private String password;
     private Boolean adminRole;
     private Map<String, Order> ordersMap = new ConcurrentHashMap<>();
-    private CarritoService carrito = new CarritoService();
+    private CartService cart = new CartService();
 
 
     public User(String firstName, String lastName, String password) {
@@ -40,26 +40,26 @@ public class User {
         adminRole = true;
     }
     public void addOrder(Order order) {
-        this.ordersMap.put(order.getOrderID(), order);;
+        this.ordersMap.put(order.getOrderID(), order);
     }
     public Map<String, Order> getOrders() {
         return ordersMap;
     }
 
-    public List<Producto> getCarritoProducts(){
-        return carrito.getProductosEnCarrito();
+    public List<Product> getCartProducts(){
+        return cart.getProductsInCart();
     }
 
-    public void eliminarTodoCarrito(){
-        carrito.eliminarTodoCarrito();
+    public void deleteTodoCart(){
+        cart.deleteTodoCart();
     }
 
-    public void eliminarDelCarrito(int index) {
-        carrito.eliminarDelCarrito(index);
+    public void deleteFromCart(int index) {
+        cart.deleteFromCart(index);
     }
 
-    public void agregarAlCarrito(String titulo, BigDecimal precio, String imagen, int cantidad) {
-        carrito.agregarAlCarrito(titulo, precio, imagen, cantidad);
+    public void addAlCart(String title, BigDecimal price, String image, int quantity) {
+        cart.addAlCart(title, price, image, quantity);
     }
 }
 

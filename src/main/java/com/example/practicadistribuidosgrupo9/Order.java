@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private List<Producto> productos;
+    private List<Product> products;
     private String orderID;
     private String cardNumber;
     private String cardHolder;
@@ -13,15 +13,15 @@ public class Order {
     private boolean reported = false;
 
 
-    public Order(String orderID, String cardNumber, String cardHolder, String expiryDate, String securityCode, List<Producto> productos) {
+    public Order(String orderID, String cardNumber, String cardHolder, String expiryDate, String securityCode, List<Product> products) {
         this.orderID = orderID;
         this.cardNumber = cardNumber;
         this.cardHolder = cardHolder;
         this.expiryDate = expiryDate;
         this.securityCode = securityCode;
-        this.productos = new ArrayList<>();
-        for(Producto p : productos){
-            this.productos.add(p);
+        this.products = new ArrayList<>();
+        for(Product p : products){
+            this.products.add(p);
         }
 
     }
@@ -30,8 +30,8 @@ public class Order {
         return orderID;
     }
 
-    public List<Producto> getProductos(){
-        return productos;
+    public List<Product> getProducts(){
+        return products;
     }
 
     public void setOrderID(String orderID) {

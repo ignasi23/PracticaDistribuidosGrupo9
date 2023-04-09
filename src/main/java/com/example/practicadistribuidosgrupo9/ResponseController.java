@@ -1,6 +1,5 @@
 package com.example.practicadistribuidosgrupo9;
 
-// import com.example.model.Response;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -19,11 +19,14 @@ import java.util.Map;
 
 @Controller
 public class AuthController {
-    public static Map<String, User> users;
+    public static final String AD = "ADMIN";
+    public static final String REDIR = "redirect:/login";
+
+    public static Map<String, User> users = new HashMap<>();
 
     public AuthController() {
-        users = new HashMap<>();
-        User admin = new User("ADMIN", "ADMIN", "ADMIN"); //crear variable admin en vez de tres veces literal
+
+        User admin = new User(AD, AD, AD);
         admin.setAdminRole();
         users.put("ADMIN@GMAIL.COM", admin);
     }
@@ -40,7 +43,7 @@ public class AuthController {
             session.setAttribute("user", email.toUpperCase());
             //cookie
             Cookie sessionCookie = new Cookie("user", email);
-            sessionCookie.setMaxAge(60 * 60 * 24); // 1 día de duración
+            sessionCookie.setMaxAge(60 * 60 * 24); // 1 day
             response.addCookie(sessionCookie);
             return "redirect:/?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName();
         } else {
@@ -57,7 +60,7 @@ public class AuthController {
         Cookie sessionCookie = new Cookie("user", "");
         sessionCookie.setMaxAge(0);
         response.addCookie(sessionCookie);
-        return "redirect:/login"; //usar constante (se repite 3 veces)
+        return REDIR;
     }
 
 
@@ -67,7 +70,7 @@ public class AuthController {
         if (!users.containsKey(username)) {
             users.put(username.toUpperCase(), new User(firstName, lastName, password));
             session.setAttribute("user", username);
-            return "redirect:/login";
+            return REDIR;
         } else {
             return "redirect:/login?registerError=true";
         }
@@ -89,7 +92,7 @@ public class AuthController {
     @GetMapping("/verify")
     public String verify(@CookieValue(name = "user", defaultValue = "") String user, Model model) {
         if (user.isEmpty() || !users.containsKey(user.toUpperCase())) {
-            return "redirect:/login";
+            return REDIR;
         } else {
             // valid users's sesssion
             User currentUser = users.get(user.toUpperCase());

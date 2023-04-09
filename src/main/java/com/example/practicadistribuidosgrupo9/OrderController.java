@@ -11,44 +11,35 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class OrderController {
+    public static final String ORDID = "orderID";
 
     public static List<OrderReport> orderReports;
     static {orderReports = new ArrayList<>();}
     @PostMapping("/orders")
     public ResponseEntity<Order> createOrder(@CookieValue(name = "user", defaultValue = "") String user , @RequestBody JsonNode o) {
-        // Almacenar el pedido en el mapa
+        // Store the order on the map
         User currentUser = AuthController.users.get(user.toUpperCase());
-        List<Producto> products = currentUser.getCarritoProducts();
-        Order order = new Order(o.get("orderID").asText(), o.get("cardNumber").asText(), o.get("cardHolder").asText(), o.get("expiryDate").asText(), o.get("securityCode").asText(), products);
+        List<Product> products = currentUser.getCartProducts();
+        Order order = new Order(o.get(ORDID).asText(), o.get("cardNumber").asText(), o.get("cardHolder").asText(), o.get("expiryDate").asText(), o.get("securityCode").asText(), products);
         if(currentUser != null){
             currentUser.addOrder(order);
-            currentUser.eliminarTodoCarrito();
+            currentUser.deleteTodoCart();
         }
-        // Devolver una respuesta al cliente
+        // Return a response to the client
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
     @PostMapping("/reportOrder")
     public String reportOrder(@CookieValue(name = "user", defaultValue = "") String user , @RequestBody JsonNode o) {
-        // Almacenar el pedido en el mapa
+        // Store the order on the map
         User currentUser = AuthController.users.get(user.toUpperCase());
         if(currentUser != null){
-            currentUser.getOrders().get(o.get("orderID").asText()).setReported(true);
-            OrderReport orderReport = new OrderReport(user, o.get("orderID").asText(), o.get("reportMsg").asText());
+            currentUser.getOrders().get(o.get(ORDID).asText()).setReported(true);
+            OrderReport orderReport = new OrderReport(user, o.get(ORDID).asText(), o.get("reportMsg").asText());
             orderReports.add(orderReport);
         }
-        // Devolver una respuesta al cliente
+        // Return a response to the client
         return "Ok";    // Neman wtf
     }
 
-   /* @PostMapping("/solveReportOrder")
-    public String solveReportOrder(@CookieValue(name = "user", defaultValue = "") String user , @RequestBody JsonNode o) {
-        // Almacenar el pedido en el mapa
-        User currentUser = AuthController.users.get(user.toUpperCase());
-        if(currentUser != null){
-            orderReports.ge//get(o.get("orderID").asText()).setReportSolved(true);
-        }
-        // Devolver una respuesta al cliente
-        return "Ok";
-    }*/
 }

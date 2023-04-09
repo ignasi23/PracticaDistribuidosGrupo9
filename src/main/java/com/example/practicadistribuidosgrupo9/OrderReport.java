@@ -1,7 +1,5 @@
 package com.example.practicadistribuidosgrupo9;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class OrderReport {
     private String userName;
@@ -15,7 +13,6 @@ public class OrderReport {
         this.reportMsg = reportMsg;
 
     }
-
     public String getUserName() {
         return userName;
     }

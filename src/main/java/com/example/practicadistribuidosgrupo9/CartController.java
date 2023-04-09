@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 public class CartController {
 
     @Autowired
-    private CarritoService carritoService;
+    private CartService cartService;
 
     @GetMapping("/cart")
-    public String carrito(Model model) {
-        model.addAttribute("productos", carritoService.getProductosEnCarrito());
-        model.addAttribute("total", carritoService.getTotal());
+    public String cart (Model model) {
+        model.addAttribute("productos", cartService.getProductsInCart());
+        model.addAttribute("total", cartService.getTotal());
         return "cart";
     }
 
@@ -29,8 +29,8 @@ public class CartController {
                             @CookieValue(name = "user", defaultValue = "") String user) {
         User currentUser = AuthController.users.get(user.toUpperCase());
         if (submit.equals("addtocard")) {
-            carritoService.agregarAlCarrito(title, new BigDecimal(price), image, quantity);
-            currentUser.agregarAlCarrito(title, new BigDecimal(price), image, quantity);
+            cartService.addAlCart(title, new BigDecimal(price), image, quantity);
+            currentUser.addAlCart(title, new BigDecimal(price), image, quantity);
         }
         return "redirect:/cart";
     }
@@ -39,8 +39,8 @@ public class CartController {
     @ResponseBody
     public ResponseEntity<Void> removeFromCart(@PathVariable("index") int index, @CookieValue(name = "user", defaultValue = "") String user) {
         User currentUser = AuthController.users.get(user.toUpperCase());
-        carritoService.eliminarDelCarrito(index);
-        currentUser.eliminarDelCarrito(index);
+        cartService.deleteFromCart(index);
+        currentUser.deleteFromCart(index);
         return ResponseEntity.noContent().build();
     }
 }
