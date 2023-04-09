@@ -69,4 +69,8 @@ public class RootController {
 
         return "/checkout";
     }
+    @GetMapping("/error")
+    public String error(Model model) {
+        return "/error";
+    }
 }
