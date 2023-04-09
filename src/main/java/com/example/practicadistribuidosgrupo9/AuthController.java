@@ -13,7 +13,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +23,7 @@ public class AuthController {
 
     public AuthController() {
         users = new HashMap<>();
-        User admin = new User("ADMIN", "ADMIN", "ADMIN");
+        User admin = new User("ADMIN", "ADMIN", "ADMIN"); //crear variable admin en vez de tres veces literal
         admin.setAdminRole();
         users.put("ADMIN@GMAIL.COM", admin);
     }
@@ -52,13 +51,13 @@ public class AuthController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session, HttpServletResponse response) {
-        // Invalidar la sesión
+        // invalidate the session
         session.invalidate();
-        // Eliminar la cookie
+        // Delete the cookie
         Cookie sessionCookie = new Cookie("user", "");
         sessionCookie.setMaxAge(0);
         response.addCookie(sessionCookie);
-        return "redirect:/login";
+        return "redirect:/login"; //usar constante (se repite 3 veces)
     }
 
 
@@ -92,7 +91,7 @@ public class AuthController {
         if (user.isEmpty() || !users.containsKey(user.toUpperCase())) {
             return "redirect:/login";
         } else {
-            // La sesión del usuario es válida
+            // valid users's sesssion
             User currentUser = users.get(user.toUpperCase());
             model.addAttribute("firstName", currentUser.getFirstName());
             model.addAttribute("lastName", currentUser.getLastName());
