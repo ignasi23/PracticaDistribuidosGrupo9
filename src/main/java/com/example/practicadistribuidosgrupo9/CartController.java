@@ -17,7 +17,7 @@ public class CartController {
     private UserService userService;
 
     @GetMapping("/cart")
-    public String cart(Model model) {
+    public String cart (Model model) {
         model.addAttribute("productos", cartService.getProductsInCart());
         model.addAttribute("total", cartService.getTotal());
         return "cart";
@@ -26,7 +26,7 @@ public class CartController {
     @PostMapping("/cart")
     public String addToCart(@RequestParam("product-title") String title,
                             @RequestParam("product-price") String price,
-                            @RequestParam("product-quantity") int quantity,
+                            @RequestParam("product-quanity") int quantity,
                             @RequestParam("product-image") String image,
                             @RequestParam("submit") String submit,
                             @CookieValue(name = "user", defaultValue = "") String user) {
@@ -50,7 +50,6 @@ public class CartController {
         return ResponseEntity.noContent().build();
     }
 }
-
 
 
 
