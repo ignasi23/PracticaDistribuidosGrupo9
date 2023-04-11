@@ -18,14 +18,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-public class AuthController {
+public class UserController {
     public static final String AD = "ADMIN";
     public static final String REDIR = "redirect:/login";
 
     public static Map<String, User> users = new HashMap<>();
 
-    public AuthController() {
-
+    public UserController() {
         User admin = new User(AD, AD, AD);
         admin.setAdminRole();
         users.put("ADMIN@GMAIL.COM", admin);

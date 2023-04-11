@@ -27,7 +27,7 @@ public class CartController {
                             @RequestParam("product-image") String image,
                             @RequestParam("submit") String submit,
                             @CookieValue(name = "user", defaultValue = "") String user) {
-        User currentUser = AuthController.users.get(user.toUpperCase());
+        User currentUser = UserController.users.get(user.toUpperCase());
         if (submit.equals("addtocard")) {
             cartService.addAlCart(title, new BigDecimal(price), image, quantity);
             currentUser.addAlCart(title, new BigDecimal(price), image, quantity);
@@ -38,7 +38,7 @@ public class CartController {
     @DeleteMapping("/cart/{index}")
     @ResponseBody
     public ResponseEntity<Void> removeFromCart(@PathVariable("index") int index, @CookieValue(name = "user", defaultValue = "") String user) {
-        User currentUser = AuthController.users.get(user.toUpperCase());
+        User currentUser = UserController.users.get(user.toUpperCase());
         cartService.deleteFromCart(index);
         currentUser.deleteFromCart(index);
         return ResponseEntity.noContent().build();
