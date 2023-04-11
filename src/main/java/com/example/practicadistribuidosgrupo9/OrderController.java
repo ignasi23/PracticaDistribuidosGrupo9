@@ -18,7 +18,7 @@ public class OrderController {
     @PostMapping("/orders")
     public ResponseEntity<Order> createOrder(@CookieValue(name = "user", defaultValue = "") String user , @RequestBody JsonNode o) {
         // Store the order on the map
-        User currentUser = AuthController.users.get(user.toUpperCase());
+        User currentUser = UserController.users.get(user.toUpperCase());
         List<Product> products = currentUser.getCartProducts();
         Order order = new Order(o.get(ORDID).asText(), o.get("cardNumber").asText(), o.get("cardHolder").asText(), o.get("expiryDate").asText(), o.get("securityCode").asText(), products);
         if(currentUser != null){
@@ -32,7 +32,7 @@ public class OrderController {
     @PostMapping("/reportOrder")
     public String reportOrder(@CookieValue(name = "user", defaultValue = "") String user , @RequestBody JsonNode o) {
         // Store the order on the map
-        User currentUser = AuthController.users.get(user.toUpperCase());
+        User currentUser = UserController.users.get(user.toUpperCase());
         if(currentUser != null){
             currentUser.getOrders().get(o.get(ORDID).asText()).setReported(true);
             OrderReport orderReport = new OrderReport(user, o.get(ORDID).asText(), o.get("reportMsg").asText());
