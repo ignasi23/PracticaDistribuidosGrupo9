@@ -40,6 +40,17 @@ public class User {
         return userName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Boolean getAdminRole() {
         return adminRole;
@@ -69,5 +80,7 @@ public class User {
     public void addAlCart(String title, BigDecimal price, String image, int quantity) {
         cart.addAlCart(title, price, image, quantity);
     }
+
+
 }
 
