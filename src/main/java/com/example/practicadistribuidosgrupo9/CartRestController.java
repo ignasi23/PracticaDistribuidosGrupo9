@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,13 +11,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class CartRestController {
-
     @Autowired
     private CartService cartService;
 
     @Autowired
     private UserService userService;
 
+    @ResponseStatus (HttpStatus.OK)
     @GetMapping("/cart")
     public ResponseEntity<Map<String, Object>> getCart(@CookieValue(name = "user", defaultValue = "") String user) {
         User currentUser = userService.getUserByEmail(user);
@@ -31,7 +30,7 @@ public class CartRestController {
         cart.put("message", "Cart retrieved successfully.");
         return ResponseEntity.ok(cart);
     }
-
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/cart")
     public ResponseEntity<Map<String, String>> addToCart(@RequestParam("product-title") String title,
                                                          @RequestParam("product-price") String price,
@@ -50,9 +49,10 @@ public class CartRestController {
             response.put("message", "Product added to cart successfully.");
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     //We did not put the method PUT because our car can not do it.
+    @ResponseStatus (HttpStatus.OK)
     @DeleteMapping("/cart/{index}")
     public ResponseEntity<Map<String, String>> removeFromCart(@PathVariable("index") int index, @CookieValue(name = "user", defaultValue = "") String user) {
         User currentUser = userService.getUserByEmail(user);
