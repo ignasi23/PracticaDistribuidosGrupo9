@@ -11,10 +11,11 @@ $(document).ready(function() {
 
                 // Loop through the response data and append new rows to the table
                 $.each(response, function(index, report) {
+                    console.log(report);
                     var row = '<tr>' +
                         '<td>' + report[0] + '</td>' +
-                        '<td>' + report[1] + '</td>' +
-                        '<td>' + report[2] + '</td>' +
+                        '<td>' + report[0] + '</td>' +
+                        '<td>' + report[0] + '</td>' +
                         '</tr>';
                     $('#report-table-body').append(row);
                 });
