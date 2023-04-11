@@ -28,6 +28,9 @@ public class CartController {
                             @RequestParam("submit") String submit,
                             @CookieValue(name = "user", defaultValue = "") String user) {
         User currentUser = UserController.users.get(user.toUpperCase());
+        if (currentUser == null) {
+            return "redirect:/login?error=true";
+        }
         if (submit.equals("addtocard")) {
             cartService.addAlCart(title, new BigDecimal(price), image, quantity);
             currentUser.addAlCart(title, new BigDecimal(price), image, quantity);
