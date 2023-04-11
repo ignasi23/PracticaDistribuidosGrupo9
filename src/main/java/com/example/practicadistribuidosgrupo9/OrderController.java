@@ -27,7 +27,7 @@ public class OrderController {
         orderReports = new ArrayList<>();
     }
 
-    @PostMapping("/orders")
+    @PostMapping("/v2/orders")
     public ResponseEntity<Order> createOrder(@CookieValue(name = "user", defaultValue = "") String user, @RequestBody JsonNode o) {
         // Store the order on the map
         User currentUser = userService.getUserByEmail(user);
@@ -41,7 +41,7 @@ public class OrderController {
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
-    @PostMapping("/reportOrder")
+    @PostMapping("/v2/reportOrder")
     public String reportOrder(@CookieValue(name = "user", defaultValue = "") String user, @RequestBody JsonNode o) {
         // Store the order on the map
         User currentUser = userService.getUserByEmail(user);

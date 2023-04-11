@@ -76,7 +76,7 @@ public class UserRestController {
     public ResponseEntity<Map<String, String>> deleteUser(@PathVariable("userName") String userName) {
         User user = userService.getUserByEmail(userName);
         if (user != null) {
-            userService.DeleteUser(userName);
+            userService.deleteUser(userName);
             Map<String, String> response = new HashMap<>();
             response.put("message", "User deleted successfully.");
             return ResponseEntity.ok(response);
