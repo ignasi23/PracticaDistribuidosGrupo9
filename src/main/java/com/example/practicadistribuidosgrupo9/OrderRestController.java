@@ -15,7 +15,7 @@ public class OrderRestController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/orders")
+    @PostMapping("V2/orders")
     public ResponseEntity<String> createOrder(@CookieValue(name = "user", defaultValue = "") String userEmail, @RequestBody Order order) {
         Order createdOrder = orderService.createOrder(userEmail, order);
         if (createdOrder != null) {
@@ -24,7 +24,7 @@ public class OrderRestController {
         return new ResponseEntity<>("Failed to create order", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/reportOrder")
+    @PostMapping("V2/reportOrder")
     public ResponseEntity<String> reportOrder(@CookieValue(name = "user", defaultValue = "") String userEmail, @RequestBody OrderReport orderReport) {
         boolean success = orderService.reportOrder(userEmail, orderReport.getOrderID(), orderReport.getReportMsg());
         if (success) {
