@@ -13,7 +13,7 @@ public class CartRestController {
     @Autowired
     private CartService cartService;
 
-    @GetMapping
+    @GetMapping("/cart")
     public ResponseEntity<Map<String, Object>> getCart() {
         Map<String, Object> cart = new HashMap<>();
         cart.put("productos", cartService.getProductsInCart());
