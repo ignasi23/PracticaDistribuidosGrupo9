@@ -98,7 +98,7 @@ public class UserController {
             model.addAttribute("userOrders", currentUser.getOrders());
             if (currentUser.getAdminRole()) {
                 model.addAttribute("adminRole", true);
-                model.addAttribute("reports", OrderController.orderReports);
+                //model.addAttribute("reports", OrderController.orderReports);
             }
 
             return "profile";

@@ -91,12 +91,12 @@
         <th>Report Message</th>
       </thead>
       <tbody id="report-table-body">
-        <tr th:each="report: ${reports}">
-          <td id="reportUser" th:text="${report.userName}"></td>
-          <td id="reportID" th:text="${report.orderID}"></td>
-          <td id="reportMsg" th:text="${report.reportMsg}"></td>
-
-        </tr>
+      <tr th:each="report: ${reports}">
+        <td id="reportUser" th:text="${report.userName}"></td>
+        <td id="reportID" th:text="${report.orderID}"></td>
+        <td id="reportMsg" th:text="${report.reportMsg}"></td>
+        <td><br></td>
+      </tr>
       </tbody>
     </table>
   </article>
@@ -166,15 +166,12 @@
       body: JSON.stringify(orderData),
     }).then((response) => response.json()).then((data) => {
       console.log('Pedido creado con éxito:', data);
-      // Aquí puedes agregar la lógica para mostrar un mensaje de éxito al usuario y/o redirigir a otra página
+
     }).catch((error) => {
       console.error('Error:', error);
     });
 
   }
-
-
-
 </script>
 </body>
 </html>

@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 public class CartRestController {
     @Autowired
     private CartService cartService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/cart")
     public ResponseEntity<Map<String, Object>> getCart() {
@@ -28,7 +30,7 @@ public class CartRestController {
                                                          @RequestParam("product-image") String image,
                                                          @RequestParam("submit") String submit,
                                                          @CookieValue(name = "user", defaultValue = "") String user) {
-        User currentUser = UserController.users.get(user.toUpperCase());
+        User currentUser = userService.getUserByEmail(user);
         if (submit.equals("addtocard")) {
             cartService.addAlCart(title, new BigDecimal(price), image, quantity);
             currentUser.addAlCart(title, new BigDecimal(price), image, quantity);
@@ -41,7 +43,7 @@ public class CartRestController {
 
     @DeleteMapping("/cart/{index}")
     public ResponseEntity<Void> removeFromCart(@PathVariable("index") int index, @CookieValue(name = "user", defaultValue = "") String user) {
-        User currentUser = UserController.users.get(user.toUpperCase());
+        User currentUser = userService.getUserByEmail(user);
         cartService.deleteFromCart(index);
         currentUser.deleteFromCart(index);
         return ResponseEntity.noContent().build();

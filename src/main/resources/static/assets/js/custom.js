@@ -12,12 +12,17 @@ $(document).ready(function() {
                 // Loop through the response data and append new rows to the table
                 $.each(response, function(index, report) {
                     console.log(report);
-                    var row = '<tr>' +
-                        '<td>' + report[0] + '</td>' +
-                        '<td>' + report[0] + '</td>' +
-                        '<td>' + report[0] + '</td>' +
-                        '</tr>';
-                    $('#report-table-body').append(row);
+
+                    for (var i = 0; i < report.length; i++) {
+                        var row = '<tr>';
+                        row += '<td>' + report[i][0] + '</td>' +
+                            '<td>' + report[i][1] + '</td>' +
+                            '<td>' + report[i][2] + '</td>';
+                        row += '</tr>';
+                        $('#report-table-body').append(row);
+                    }
+
+
                 });
             },
             error: function(xhr, status, error) {
