@@ -18,6 +18,17 @@ public class UserService {
         users.put("ADMIN@GMAIL.COM", admin);
     }
 
+    public void updateUser(User updatedUser) {
+        String userEmail = updatedUser.getUserName().toUpperCase();
+        if (users.containsKey(userEmail)) {
+            users.put(userEmail, updatedUser);
+        }
+    }
+
+    public void deleteUser(String email) {
+        users.remove(email.toUpperCase());
+    }
+
     public User getUserByEmail(String email) {
         return users.get(email.toUpperCase());
     }
