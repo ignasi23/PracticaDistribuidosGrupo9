@@ -9,15 +9,18 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
+
+    private String userName;
     private Boolean adminRole;
     private Map<String, Order> ordersMap = new ConcurrentHashMap<>();
     private CartService cart = new CartService();
 
 
-    public User(String firstName, String lastName, String password) {
+    public User(String firstName, String lastName, String password, String userName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.userName = userName;
         adminRole = false;
     }
 
@@ -32,6 +35,11 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
 
     public Boolean getAdminRole() {
         return adminRole;

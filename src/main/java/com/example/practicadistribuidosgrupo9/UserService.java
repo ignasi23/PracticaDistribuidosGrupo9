@@ -3,42 +3,35 @@ import com.example.practicadistribuidosgrupo9.User;
 import org.springframework.stereotype.Service;
 import com.example.practicadistribuidosgrupo9.UserController;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class UserService {
 
-    public static Map<String, User> users = UserController.users;
+    private Map<String, User> users = new ConcurrentHashMap<>();
 
-    public User authenticateUser(String email, String password) {
-        User user = users.get(email.toUpperCase());
-        if (user != null && user.getPassword().equals(password)) {
-            return user;
-        } else {
-            return null;
-        }
-    }
-
-    public boolean registerUser(String firstName, String lastName, String email, String password) {
-        String username = email.toUpperCase();
-        if (!users.containsKey(username)) {
-            users.put(username, new User(firstName, lastName, password));
-            return true;
-        } else {
-            return false;
-        }
+    public UserService() {
+        User admin = new User("ADMIN", "ADMIN", "ADMIN", "ADMIN@GMAIL.COM");
+        admin.setAdminRole();
+        users.put("ADMIN@GMAIL.COM", admin);
     }
 
     public User getUserByEmail(String email) {
         return users.get(email.toUpperCase());
     }
 
-    public void logoutUser(String email) {
-        // No implementation needed as session is managed by Spring Security
+    public void addUser(User user) {
+        users.put(user.getUserName().toUpperCase(), user);
     }
 
-    public boolean isAdmin(String email) {
-        User user = users.get(email.toUpperCase());
-        return user != null && user.getAdminRole();
+    public boolean userExists(String email) {
+        return users.containsKey(email.toUpperCase());
+    }
+
+    public Collection<User> getAllUsers() {
+        return users.values();
     }
 }
+

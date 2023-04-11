@@ -24,31 +24,18 @@ import java.util.Map;
 
 @Controller
 public class UserController {
-
     @Autowired
-        UserService userService;
-
-    public static final String AD = "ADMIN";
+    private UserService userService;
     public static final String REDIR = "redirect:/login";
-
-    public static Map<String, User> users = new HashMap<>();
-
-    public UserController() {
-        users = new HashMap<>();
-        User admin = new User(AD, AD, AD);
-        admin.setAdminRole();
-        users.put("ADMIN@GMAIL.COM", admin);
-    }
 
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-
     @PostMapping("/authenticate")
     public String authenticate(@RequestParam String email, @RequestParam String password, HttpSession session, HttpServletResponse response) {
-        User user = users.get(email.toUpperCase());
+        User user = userService.getUserByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", email.toUpperCase());
             //cookie
@@ -76,10 +63,10 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, HttpSession session) {
-        String username = email.toUpperCase();
-        if (!users.containsKey(username)) {
-            users.put(username.toUpperCase(), new User(firstName, lastName, password));
-            session.setAttribute("user", username);
+        String userName = email.toUpperCase();
+        if (!userService.userExists(userName)) {
+            userService.addUser(new User(firstName, lastName, password, userName));
+            session.setAttribute("user", userName);
             return REDIR;
         } else {
             return "redirect:/login?registerError=true";
@@ -91,29 +78,27 @@ public class UserController {
     public String getUsers() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.writeValueAsString(users);
+            return objectMapper.writeValueAsString(userService.getAllUsers());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return "{\"error\": \"Error al procesar el JSON\"}";
         }
-
     }
 
     @GetMapping("/verify")
     public String verify(@CookieValue(name = "user", defaultValue = "") String user, Model model) {
-        if (user.isEmpty() || !users.containsKey(user.toUpperCase())) {
+        if (user.isEmpty() || !userService.userExists(user.toUpperCase())) {
             return REDIR;
         } else {
-            // valid users's sesssion
-            User currentUser = users.get(user.toUpperCase());
+            // valid users's session
+            User currentUser = userService.getUserByEmail(user.toUpperCase());
             model.addAttribute("firstName", currentUser.getFirstName());
             model.addAttribute("lastName", currentUser.getLastName());
             model.addAttribute("userEmail", user);
             model.addAttribute("userOrders", currentUser.getOrders());
-            if(currentUser.getAdminRole()) {
+            if (currentUser.getAdminRole()) {
                 model.addAttribute("adminRole", true);
                 model.addAttribute("reports", OrderController.orderReports);
-
             }
 
             return "profile";
