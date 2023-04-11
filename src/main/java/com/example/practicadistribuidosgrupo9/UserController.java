@@ -25,6 +25,7 @@ public class UserController {
     public static Map<String, User> users = new HashMap<>();
 
     public UserController() {
+        users = new HashMap<>();
         User admin = new User(AD, AD, AD);
         admin.setAdminRole();
         users.put("ADMIN@GMAIL.COM", admin);
@@ -34,6 +35,7 @@ public class UserController {
     public String login() {
         return "login";
     }
+
 
     @PostMapping("/authenticate")
     public String authenticate(@RequestParam String email, @RequestParam String password, HttpSession session, HttpServletResponse response) {

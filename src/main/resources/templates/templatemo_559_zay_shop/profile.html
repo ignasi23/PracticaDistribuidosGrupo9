@@ -69,10 +69,10 @@
 
           <table class="table table-light">
             <tbody>
-            <tr th:each="product: ${order.value.productos}">
-              <td> <img th:src="${product.imagen}" alt="Imagen del producto" width="50" height="50"></td>
-              <td th:text="${product.titulo}"></td>
-              <td th:text="${product.precio}"></td>
+            <tr th:each="product: ${order.value.products}">
+              <td> <img th:src="${product.image}" alt="Imagen del producto" width="50" height="50"></td>
+              <td th:text="${product.title}"></td>
+              <td th:text="${product.price}"></td>
             </tr>
             </tbody>
           </table>
@@ -101,14 +101,21 @@
     </table>
   </article>
 </section>
-
 </div>
 
+<div id="myDialog">
+  <div class="dialog-content">
+    <label for="userInput">Explica tu reporte:</label>
+    <input type="text" id="userInput">
+    <br>
+    <button id="saveMessageButton">Guardar</button>
+    <button onclick="closeDialog()">Cancelar</button>
+  </div>
 </div>
 
-<!-- Start Footer -->
-<th:block th:replace="~{footer.html :: footer}" />
-<!-- End Footer -->
+  <!-- Start Footer -->
+  <th:block th:replace="~{footer.html :: footer}" />
+  <!-- End Footer -->
 <script src="assets/js/jquery-1.11.0.min.js"></script>
 <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
