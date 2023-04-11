@@ -77,7 +77,7 @@ public class UserRestController {
         User user = userService.getUserByEmail(userName);
         if (user != null) {
             userService.deleteUser(userName);
-
+            //ahora si
             Map<String, String> response = new HashMap<>();
             response.put("message", "User deleted successfully.");
             return ResponseEntity.ok(response);
