@@ -76,8 +76,7 @@ public class UserRestController {
     public ResponseEntity<Map<String, String>> deleteUser(@PathVariable("userName") String userName) {
         User user = userService.getUserByEmail(userName);
         if (user != null) {
-            userService.deleteUser(userName);
-            //ahora si
+            userService.DeleteUser(userName);
             Map<String, String> response = new HashMap<>();
             response.put("message", "User deleted successfully.");
             return ResponseEntity.ok(response);
@@ -85,3 +84,4 @@ public class UserRestController {
         return ResponseEntity.notFound().build();
     }
 }
+
