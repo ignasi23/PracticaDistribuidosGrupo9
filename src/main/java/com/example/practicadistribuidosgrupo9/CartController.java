@@ -26,7 +26,7 @@ public class CartController {
     @PostMapping("/cart")
     public String addToCart(@RequestParam("product-title") String title,
                             @RequestParam("product-price") String price,
-                            @RequestParam("product-quanity") int quantity,
+                            @RequestParam("product-quantity") int quantity,
                             @RequestParam("product-image") String image,
                             @RequestParam("submit") String submit,
                             @CookieValue(name = "user", defaultValue = "") String user) {
