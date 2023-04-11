@@ -90,11 +90,11 @@
         <th>Order ID</th>
         <th>Report Message</th>
       </thead>
-      <tbody>
+      <tbody id="report-table-body">
         <tr th:each="report: ${reports}">
-          <td th:text="${report.userName}"></td>
-          <td th:text="${report.orderID}"></td>
-          <td th:text="${report.reportMsg}"></td>
+          <td id="reportUser" th:text="${report.userName}"></td>
+          <td id="reportID" th:text="${report.orderID}"></td>
+          <td id="reportMsg" th:text="${report.reportMsg}"></td>
 
         </tr>
       </tbody>
@@ -121,6 +121,7 @@
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/templatemo.js"></script>
 <script src="assets/js/custom.js"></script>
+
 <script>
 
   function report(orderId) {
@@ -171,6 +172,9 @@
     });
 
   }
+
+
+
 </script>
 </body>
 </html>
