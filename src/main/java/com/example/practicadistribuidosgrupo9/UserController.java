@@ -1,6 +1,8 @@
 package com.example.practicadistribuidosgrupo9;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -14,7 +16,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -109,6 +113,25 @@ public class UserController {
 
             return "profile";
         }
+    }
+
+    @GetMapping("/get_reports")
+    @ResponseBody
+    public String getReports() throws JsonProcessingException {
+        List<OrderReport> Reports = OrderController.orderReports;
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode rootNode = mapper.createObjectNode();
+        ArrayNode arrayMatches = rootNode.putArray("arrayMatches");
+        for (OrderReport r : Reports) {
+            List<Object> o = new ArrayList<>();
+            o.add(r.getUserName());
+            o.add(r.getOrderID());
+            o.add(r.getReportMsg());
+            JsonNode j = mapper.convertValue(o, JsonNode.class);
+            arrayMatches.add(j);
+        }
+        String json = mapper.writeValueAsString(rootNode);
+        return json;
     }
 
 
