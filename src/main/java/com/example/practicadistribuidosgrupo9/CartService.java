@@ -1,5 +1,9 @@
 package com.example.practicadistribuidosgrupo9;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -8,6 +12,10 @@ import java.util.List;
 
 @Service
 public class CartService {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
 
     private List<Product> cart = new ArrayList<>();
 

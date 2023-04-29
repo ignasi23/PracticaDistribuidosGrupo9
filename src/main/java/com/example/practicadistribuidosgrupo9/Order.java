@@ -1,9 +1,18 @@
 package com.example.practicadistribuidosgrupo9;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import org.springframework.data.annotation.Id;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private List<Product> products;
     private String orderID;
     private String cardNumber;

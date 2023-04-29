@@ -1,5 +1,6 @@
 package com.example.practicadistribuidosgrupo9;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/responses")
 public class ResponseController {
+    @Autowired
+    private ResponseRepository posts;
 
     private List<Response> responses = new ArrayList<>();
 

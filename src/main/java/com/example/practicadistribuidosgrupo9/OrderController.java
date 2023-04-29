@@ -20,6 +20,8 @@ public class OrderController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrderRepository orders;
 
     public static List<OrderReport> orderReports;
 

@@ -12,6 +12,8 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+    @Autowired
+    private CartRepository carts; // no se si es carts o es objets del cart, revisar.
 
     @Autowired
     private UserService userService;
