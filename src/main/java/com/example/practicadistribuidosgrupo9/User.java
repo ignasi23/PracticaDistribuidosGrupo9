@@ -1,13 +1,12 @@
 package com.example.practicadistribuidosgrupo9;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 @Entity
 public class User {
@@ -21,7 +20,8 @@ public class User {
 
     private String userName;
     private Boolean adminRole;
-    private Map<String, Order> ordersMap = new ConcurrentHashMap<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Map<String, Order> orders = new HashMap<>();
     private CartService cart = new CartService();
 
 
@@ -66,12 +66,6 @@ public class User {
     }
     public void setAdminRole() {
         adminRole = true;
-    }
-    public void addOrder(Order order) {
-        this.ordersMap.put(order.getOrderID(), order);
-    }
-    public Map<String, Order> getOrders() {
-        return ordersMap;
     }
 
     public List<Product> getCartProducts(){

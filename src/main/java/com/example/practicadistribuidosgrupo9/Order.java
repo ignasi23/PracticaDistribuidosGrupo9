@@ -1,8 +1,6 @@
 package com.example.practicadistribuidosgrupo9;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
@@ -12,7 +10,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+    @ManyToOne
+    private User user;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products;
     private String orderID;
     private String cardNumber;
@@ -84,5 +84,12 @@ public class Order {
     }
     public boolean getReported(){
         return this.reported;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

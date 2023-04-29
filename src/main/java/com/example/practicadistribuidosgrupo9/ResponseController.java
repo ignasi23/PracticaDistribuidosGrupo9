@@ -15,20 +15,21 @@ import java.util.List;
 @RequestMapping("/responses")
 public class ResponseController {
     @Autowired
-    private ResponseRepository posts;
+    private ResponseRepository responseRepository;
 
-    private List<Response> responses = new ArrayList<>();
 
     @PostMapping("/submit")
     public String submitResponse(Response response, RedirectAttributes redirectAttributes) {
-        responses.add(response);
+        responseRepository.save(response);
         redirectAttributes.addFlashAttribute("successMessage", "¡Mensaje enviado correctamente!");
         return "redirect:/contact";
     }
 
     @GetMapping
     public String viewResponses(Model model) {
+        List<Response> responses = responseRepository.findAll();
         model.addAttribute("responses", responses);
         return "responses";
     }
+
 }
