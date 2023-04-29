@@ -26,7 +26,8 @@ public class OrderController {
         }
         List<Product> products = currentUser.getCartProducts();
         Order order = new Order(o.get(ORDID).asText(), o.get("cardNumber").asText(), o.get("cardHolder").asText(), o.get("expiryDate").asText(), o.get("securityCode").asText(), products);
-        orderService.createOrder(currentUser, order);
+        order.setUser(currentUser);
+        orderService.saveOrder(order);
         currentUser.deleteTodoCart();
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }

@@ -3,9 +3,7 @@ package com.example.practicadistribuidosgrupo9;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Entity
@@ -21,7 +19,7 @@ public class User {
     private String userName;
     private Boolean adminRole;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Map<String, Order> orders = new HashMap<>();
+    private List<Order> orders;
     private CartService cart = new CartService();
 
 
@@ -30,6 +28,7 @@ public class User {
         this.lastName = lastName;
         this.password = password;
         this.userName = userName;
+        this.orders = new ArrayList<>(); // Añadir esta línea
         adminRole = false;
     }
 
@@ -83,6 +82,7 @@ public class User {
     public void addAlCart(String title, BigDecimal price, String image, int quantity) {
         cart.addAlCart(title, price, image, quantity);
     }
+
 
 
 }

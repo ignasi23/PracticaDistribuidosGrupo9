@@ -24,7 +24,7 @@ public class OrderService {
         Order order = orderRepository.findById(Long.parseLong(orderId)).orElse(null);
         if (order != null && order.getUser().equals(user)) {
             order.setReported(true);
-            OrderController.orderReports.add(new OrderReport(user.getEmail(), orderId, reportMsg));
+            OrderController.orderReports.add(new OrderReport(user.getUserName(), orderId, reportMsg));
             orderRepository.save(order);
             return true;
         }
@@ -45,5 +45,8 @@ public class OrderService {
             return user.getOrders().remove(orderId) != null;
         }
         return false;
+    }
+    public Order saveOrder(Order order) {
+        return orderRepository.save(order);
     }
 }

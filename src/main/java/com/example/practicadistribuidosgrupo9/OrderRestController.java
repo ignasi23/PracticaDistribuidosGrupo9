@@ -16,8 +16,8 @@ public class OrderRestController {
     private UserService userService;
 
     @PostMapping("V2/orders")
-    public ResponseEntity<String> createOrder(@CookieValue(name = "user", defaultValue = "") String userEmail, @RequestBody Order order) {
-        Order createdOrder = orderService.createOrder(userEmail, order);
+    public ResponseEntity<String> createOrder(@CookieValue(name = "user", defaultValue = "") User username, @RequestBody Order order) {
+        Order createdOrder = orderService.createOrder(username, order);
         if (createdOrder != null) {
             return new ResponseEntity<>("Order created successfully", HttpStatus.CREATED);
         }
@@ -25,8 +25,8 @@ public class OrderRestController {
     }
 
     @PostMapping("V2/reportOrder")
-    public ResponseEntity<String> reportOrder(@CookieValue(name = "user", defaultValue = "") String userEmail, @RequestBody OrderReport orderReport) {
-        boolean success = orderService.reportOrder(userEmail, orderReport.getOrderID(), orderReport.getReportMsg());
+    public ResponseEntity<String> reportOrder(@CookieValue(name = "user", defaultValue = "") User username, @RequestBody OrderReport orderReport) {
+        boolean success = orderService.reportOrder(username, orderReport.getOrderID(), orderReport.getReportMsg());
         if (success) {
             return new ResponseEntity<>("Order reported successfully", HttpStatus.OK);
         }
