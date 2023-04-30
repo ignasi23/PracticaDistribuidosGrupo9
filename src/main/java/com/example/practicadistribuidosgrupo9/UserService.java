@@ -7,42 +7,46 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.Collection;
+import java.util.List;
+
 @Service
 public class UserService {
 
-    private Map<String, User> users = new ConcurrentHashMap<>();
+    @Autowired
+    private UserRepository userRepository;
 
     public UserService() {
         User admin = new User("ADMIN", "ADMIN", "ADMIN", "ADMIN@GMAIL.COM");
         admin.setAdminRole();
-        users.put("ADMIN@GMAIL.COM", admin);
+        userRepository.save(admin);
     }
 
     public void updateUser(User updatedUser) {
-        String userEmail = updatedUser.getUserName().toUpperCase();
-        if (users.containsKey(userEmail)) {
-            users.put(userEmail, updatedUser);
-        }
+        userRepository.save(updatedUser);
     }
 
     public void deleteUser(String email) {
-        users.remove(email.toUpperCase());
+        userRepository.deleteByUserName(email.toUpperCase());
     }
 
     public User getUserByEmail(String email) {
-        return users.get(email.toUpperCase());
+        return userRepository.findByUserName(email.toUpperCase());
     }
 
     public void addUser(User user) {
-        users.put(user.getUserName().toUpperCase(), user);
+        userRepository.save(user);
     }
 
     public boolean userExists(String email) {
-        return users.containsKey(email.toUpperCase());
+        return userRepository.existsByUserName(email.toUpperCase());
     }
 
-    public Collection<User> getAllUsers() {
-        return users.values();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
+
 

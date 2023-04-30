@@ -12,9 +12,6 @@ public class OrderRestController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private UserService userService;
-
     @PostMapping("V2/orders")
     public ResponseEntity<String> createOrder(@CookieValue(name = "user", defaultValue = "") String userEmail, @RequestBody Order order) {
         Order createdOrder = orderService.createOrder(userEmail, order);
@@ -51,4 +48,5 @@ public class OrderRestController {
         return new ResponseEntity<>("Failed to delete order", HttpStatus.NOT_FOUND);
     }
 }
+
 
