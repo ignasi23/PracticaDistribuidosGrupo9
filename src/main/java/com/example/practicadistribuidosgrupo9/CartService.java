@@ -1,28 +1,24 @@
 package com.example.practicadistribuidosgrupo9;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 import org.springframework.stereotype.Service;
-
+import jakarta.persistence.Id;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Service
 public class CartService {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
 
     private List<Product> cart = new ArrayList<>();
 
-    public CartService() {// this is for create new carts
+    public CartService() {
     }
 
-    public void addAlCart(String title, BigDecimal price, String image, int quantity) {
+    public void addToCart(String title, BigDecimal price, String image, int quantity) {
         for (int i = 0; i < quantity; i++) {
             cart.add(new Product(title, price, image));
         }
@@ -44,8 +40,20 @@ public class CartService {
         }
     }
 
-    public void deleteTodoCart() {
+    public void deleteAllFromCart() {
         cart.clear();
     }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
+
 

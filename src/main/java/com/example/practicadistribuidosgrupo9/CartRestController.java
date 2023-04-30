@@ -17,7 +17,7 @@ public class CartRestController {
     @Autowired
     private UserService userService;
 
-    @ResponseStatus (HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/cart")
     public ResponseEntity<Map<String, Object>> getCart(@CookieValue(name = "user", defaultValue = "") String user) {
         User currentUser = userService.getUserByEmail(user);
@@ -30,6 +30,7 @@ public class CartRestController {
         cart.put("message", "Cart retrieved successfully.");
         return ResponseEntity.ok(cart);
     }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/cart")
     public ResponseEntity<Map<String, String>> addToCart(@RequestParam("product-title") String title,
@@ -42,17 +43,17 @@ public class CartRestController {
         if (currentUser == null) {
             return ResponseEntity.badRequest().build();
         }
-        if (submit.equals("addtocard")) {
-            cartService.addAlCart(title, new BigDecimal(price), image, quantity);
-            currentUser.addAlCart(title, new BigDecimal(price), image, quantity);
+        if (submit.equals("addtocart")) {
+            cartService.addToCart(title, new BigDecimal(price), image, quantity);
+            currentUser.addToCart(title, new BigDecimal(price), image, quantity);
             Map<String, String> response = new HashMap<>();
             response.put("message", "Product added to cart successfully.");
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-    //We did not put the method PUT because our car can not do it.
-    @ResponseStatus (HttpStatus.OK)
+
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/cart/{index}")
     public ResponseEntity<Map<String, String>> removeFromCart(@PathVariable("index") int index, @CookieValue(name = "user", defaultValue = "") String user) {
         User currentUser = userService.getUserByEmail(user);

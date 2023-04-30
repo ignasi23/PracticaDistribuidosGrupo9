@@ -11,8 +11,8 @@ public class OrderReport {
         this.userName = userName;
         this.orderID = orderID;
         this.reportMsg = reportMsg;
-
     }
+
     public String getUserName() {
         return userName;
     }
@@ -25,11 +25,11 @@ public class OrderReport {
         return reportMsg;
     }
 
-    public void setReportSolved(boolean b){
+    public void setReportSolved(boolean b) {
         this.reportSolved = b;
     }
-    public boolean getReportSolved(){
+
+    public boolean getReportSolved() {
         return this.reportSolved;
     }
-
 }

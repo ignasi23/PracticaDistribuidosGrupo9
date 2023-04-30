@@ -12,8 +12,6 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
-    @Autowired
-    private CartRepository carts; // no se si es carts o es objets del cart, revisar.
 
     @Autowired
     private UserService userService;
@@ -28,7 +26,7 @@ public class CartController {
     @PostMapping("/cart")
     public String addToCart(@RequestParam("product-title") String title,
                             @RequestParam("product-price") String price,
-                            @RequestParam("product-quanity") int quantity,
+                            @RequestParam("product-quantity") int quantity,
                             @RequestParam("product-image") String image,
                             @RequestParam("submit") String submit,
                             @CookieValue(name = "user", defaultValue = "") String user) {
@@ -36,9 +34,9 @@ public class CartController {
         if (currentUser == null) {
             return "redirect:/login?error=true";
         }
-        if (submit.equals("addtocard")) {
-            cartService.addAlCart(title, new BigDecimal(price), image, quantity);
-            currentUser.addAlCart(title, new BigDecimal(price), image, quantity);
+        if (submit.equals("addtocart")) {
+            cartService.addToCart(title, new BigDecimal(price), image, quantity);
+            currentUser.addToCart(title, new BigDecimal(price), image, quantity);
         }
         return "redirect:/cart";
     }

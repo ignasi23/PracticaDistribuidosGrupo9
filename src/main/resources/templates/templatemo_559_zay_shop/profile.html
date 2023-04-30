@@ -57,19 +57,19 @@
   <article class='dos fa fa-suitcase'>
     <table class="table table-light">
       <tbody>
-      <tr th:each="order: ${userOrders}">
+      <tr th:each="purchaseOrder: ${userOrders}">
         <table class="table table-light">
           <thead>
           <th>Order Id</th>
           </thead>
           <tbody>
-          <td th:text="${order.value.orderID}"></td>
-          <td th:if="${!order.value.reported}"><button th:id="fetchButton" class="myButtonClass" style="background-color: red; color: white;" type="button" th:onclick="report([[${order.value.orderID}]])">Report</button></td>
-          <td th:if="${order.value.reported}"><th:text style="background-color: lightgray;">Esperando respuesta</th:text></td>
+          <td th:text="${purchaseOrder.value.orderID}"></td>
+          <td th:if="${!purchaseOrder.value.reported}"><button th:id="fetchButton" class="myButtonClass" style="background-color: red; color: white;" type="button" th:onclick="report([[${purchaseOrder.value.orderID}]])">Report</button></td>
+          <td th:if="${purchaseOrder.value.reported}"><th:text style="background-color: lightgray;">Esperando respuesta</th:text></td>
 
           <table class="table table-light">
             <tbody>
-            <tr th:each="product: ${order.value.products}">
+            <tr th:each="product: ${purchaseOrder.value.products}">
               <td> <img th:src="${product.image}" alt="Imagen del producto" width="50" height="50"></td>
               <td th:text="${product.title}"></td>
               <td th:text="${product.price}"></td>

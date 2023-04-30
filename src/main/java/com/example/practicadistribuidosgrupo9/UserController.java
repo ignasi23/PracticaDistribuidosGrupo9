@@ -108,7 +108,7 @@ public class UserController {
     @GetMapping("/get_reports")
     @ResponseBody
     public String getReports() throws JsonProcessingException {
-        List<OrderReport> Reports = OrderController.orderReports;
+        List<OrderReport> Reports = OrderReportStorage.orderReports;
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode rootNode = mapper.createObjectNode();
         ArrayNode arrayMatches = rootNode.putArray("arrayMatches");

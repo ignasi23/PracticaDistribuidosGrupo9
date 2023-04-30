@@ -1,14 +1,13 @@
 package com.example.practicadistribuidosgrupo9;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import jakarta.persistence.Id;
 
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,10 +19,15 @@ public class User {
 
     private String userName;
     private Boolean adminRole;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Map<String, Order> orders = new HashMap<>();
-    private CartService cart = new CartService();
 
+    public User() {
+    }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<PurchaseOrder> purchaseOrders;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private CartService cart;
 
     public User(String firstName, String lastName, String password, String userName) {
         this.firstName = firstName;
@@ -31,6 +35,7 @@ public class User {
         this.password = password;
         this.userName = userName;
         adminRole = false;
+        cart = new CartService();
     }
 
     public String getFirstName() {
@@ -72,18 +77,15 @@ public class User {
         return cart.getProductsInCart();
     }
 
-    public void deleteTodoCart(){
-        cart.deleteTodoCart();
-    }
-
     public void deleteFromCart(int index) {
         cart.deleteFromCart(index);
     }
 
-    public void addAlCart(String title, BigDecimal price, String image, int quantity) {
-        cart.addAlCart(title, price, image, quantity);
+    public void addToCart(String title, BigDecimal price, String image, int quantity) {
+        cart.addToCart(title, price, image, quantity);
     }
 
-
+    public List<PurchaseOrder> getOrders() {
+        return purchaseOrders;
+    }
 }
-

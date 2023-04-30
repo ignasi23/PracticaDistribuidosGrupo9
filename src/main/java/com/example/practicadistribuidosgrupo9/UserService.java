@@ -1,5 +1,7 @@
 package com.example.practicadistribuidosgrupo9;
 import com.example.practicadistribuidosgrupo9.User;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.practicadistribuidosgrupo9.UserController;
 
@@ -10,39 +12,44 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class UserService {
 
-    private Map<String, User> users = new ConcurrentHashMap<>();
+    @Autowired
+    private UserRepository userRepository;
 
-    public UserService() {
-        User admin = new User("ADMIN", "ADMIN", "ADMIN", "ADMIN@GMAIL.COM");
-        admin.setAdminRole();
-        users.put("ADMIN@GMAIL.COM", admin);
-    }
-
-    public void updateUser(User updatedUser) {
-        String userEmail = updatedUser.getUserName().toUpperCase();
-        if (users.containsKey(userEmail)) {
-            users.put(userEmail, updatedUser);
+    @PostConstruct
+    public void initAdminUser() {
+        if (userRepository.findByEmail("ADMIN@GMAIL.COM") == null) {
+            User admin = new User("ADMIN", "ADMIN", "ADMIN", "ADMIN@GMAIL.COM");
+            admin.setAdminRole();
+            userRepository.save(admin);
         }
     }
 
+    public void updateUser(User updatedUser) {
+        userRepository.save(updatedUser);
+    }
+
     public void deleteUser(String email) {
-        users.remove(email.toUpperCase());
+        User user = userRepository.findByEmail(email.toUpperCase());
+        if (user != null) {
+            userRepository.delete(user);
+        }
     }
 
     public User getUserByEmail(String email) {
-        return users.get(email.toUpperCase());
+        return userRepository.findByEmail(email.toUpperCase());
     }
 
     public void addUser(User user) {
-        users.put(user.getUserName().toUpperCase(), user);
+        userRepository.save(user);
     }
 
     public boolean userExists(String email) {
-        return users.containsKey(email.toUpperCase());
+        return userRepository.findByEmail(email.toUpperCase()) != null;
     }
 
     public Collection<User> getAllUsers() {
-        return users.values();
+        return userRepository.findAll();
     }
 }
+
 

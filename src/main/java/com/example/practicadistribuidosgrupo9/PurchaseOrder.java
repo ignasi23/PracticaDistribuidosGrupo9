@@ -1,15 +1,26 @@
 package com.example.practicadistribuidosgrupo9;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
-
-import java.util.ArrayList;
+import jakarta.persistence.Id;
 import java.util.List;
+import java.util.ArrayList;
+
+
 @Entity
-public class Order {
+@Table(name = "purchase_orders")
+public class PurchaseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @ManyToOne
     private User user;
     @OneToMany(cascade = CascadeType.ALL)
@@ -21,8 +32,10 @@ public class Order {
     private String securityCode;
     private boolean reported = false;
 
+    public PurchaseOrder() {
+    }
 
-    public Order(String orderID, String cardNumber, String cardHolder, String expiryDate, String securityCode, List<Product> products) {
+    public PurchaseOrder(String orderID, String cardNumber, String cardHolder, String expiryDate, String securityCode, List<Product> products) {
         this.orderID = orderID;
         this.cardNumber = cardNumber;
         this.cardHolder = cardHolder;
