@@ -21,11 +21,16 @@ public class User {
 
     private String userName;
     private Boolean adminRole;
-    private Map<String, Order> ordersMap = new ConcurrentHashMap<>();
+
+    @Transient
     private CartService cart = new CartService();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
+
+    public User() {
+    }
+
 
     public User(String firstName, String lastName, String password, String userName) {
         this.firstName = firstName;
@@ -70,10 +75,11 @@ public class User {
         adminRole = true;
     }
     public void addOrder(Order order) {
-        this.ordersMap.put(order.getOrderID(), order);
+        this.orders.add(order);
     }
-    public Map<String, Order> getOrders() {
-        return ordersMap;
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public List<Product> getCartProducts(){

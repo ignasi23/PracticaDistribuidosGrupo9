@@ -9,14 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
+@Table(name = "customer_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderID;
     private BigDecimal total;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<Product> products;
+
     private String cardNumber;
     private String cardHolder;
     private String expiryDate;

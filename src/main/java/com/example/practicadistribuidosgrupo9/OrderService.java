@@ -16,7 +16,7 @@ public class OrderService {
     }
 
     public Order createOrder(String userEmail, Order order) {
-        User user = userRepository.findByEmail(userEmail).orElse(null);
+        User user = userRepository.findByUserName(userEmail).orElse(null);
         if (user != null) {
             order.setUser(user);
             user.addOrder(order);
@@ -27,7 +27,7 @@ public class OrderService {
     }
 
     public boolean reportOrder(String userEmail, String orderId, String reportMsg) {
-        Optional<User> optionalUser = userRepository.findByEmail(userEmail);
+        Optional<User> optionalUser = userRepository.findByUserName(userEmail);
         if (optionalUser.isPresent()) {
             Optional<Order> optionalOrder = orderRepository.findByOrderID(orderId);
             if (optionalOrder.isPresent()) {
@@ -42,7 +42,7 @@ public class OrderService {
     }
 
     public Order getOrder(String userEmail, String orderId) {
-        Optional<User> optionalUser = userRepository.findByEmail(userEmail);
+        Optional<User> optionalUser = userRepository.findByUserName(userEmail);
         if (optionalUser.isPresent()) {
             return orderRepository.findByOrderID(orderId).orElse(null);
         }
@@ -50,7 +50,7 @@ public class OrderService {
     }
 
     public boolean deleteOrder(String userEmail, String orderId) {
-        Optional<User> optionalUser = userRepository.findByEmail(userEmail);
+        Optional<User> optionalUser = userRepository.findByUserName(userEmail);
         if (optionalUser.isPresent()) {
             Optional<Order> optionalOrder = orderRepository.findByOrderID(orderId);
             if (optionalOrder.isPresent()) {

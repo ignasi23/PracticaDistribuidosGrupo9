@@ -22,6 +22,9 @@ public class Response {
         this.message = message;
     }
 
+    public Response() {
+    }
+
     public String getName() {
         return name;
     }

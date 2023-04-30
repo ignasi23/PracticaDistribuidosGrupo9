@@ -1,8 +1,5 @@
 package com.example.practicadistribuidosgrupo9;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -11,6 +8,11 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
     private String title;
     private BigDecimal price;
     private String image;
@@ -19,6 +21,9 @@ public class Product {
         this.title = title;
         this.price = price;
         this.image = image;
+    }
+
+    public Product() {
     }
 
     public String getTitle() {

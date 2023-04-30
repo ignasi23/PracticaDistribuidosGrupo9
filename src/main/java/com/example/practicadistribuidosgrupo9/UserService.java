@@ -1,16 +1,10 @@
 package com.example.practicadistribuidosgrupo9;
-import com.example.practicadistribuidosgrupo9.User;
+
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
-import com.example.practicadistribuidosgrupo9.UserController;
-
-import java.util.Collection;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -18,7 +12,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserService() {
+    @PostConstruct
+    public void init() {
         User admin = new User("ADMIN", "ADMIN", "ADMIN", "ADMIN@GMAIL.COM");
         admin.setAdminRole();
         userRepository.save(admin);
@@ -33,7 +28,13 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
-        return userRepository.findByUserName(email.toUpperCase());
+        Optional<User> userOptional = userRepository.findByUserName(email.toUpperCase());
+        if (userOptional.isPresent()) {
+            return userOptional.get();
+        } else {
+            // Lanza una excepción o devuelve un valor predeterminado
+            throw new RuntimeException("User not found");
+        }
     }
 
     public void addUser(User user) {
