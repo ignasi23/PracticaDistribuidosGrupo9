@@ -1,5 +1,4 @@
 package com.example.practicadistribuidosgrupo9;
-//ñ
 import java.math.BigDecimal;
 
 public class Product {
