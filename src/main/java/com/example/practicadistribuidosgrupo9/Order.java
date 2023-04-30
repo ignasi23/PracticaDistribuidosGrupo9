@@ -1,11 +1,23 @@
 package com.example.practicadistribuidosgrupo9;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Entity
 public class Order {
-    private List<Product> products;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String orderID;
+    private BigDecimal total;
+    private List<Product> products;
     private String cardNumber;
     private String cardHolder;
     private String expiryDate;
