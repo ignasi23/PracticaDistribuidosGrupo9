@@ -3,6 +3,7 @@ function format(command, value = null) {
   document.execCommand(command, false, value);
 }
 
+
 function removeFormat() {
   document.execCommand('removeFormat', false, null);
 }
