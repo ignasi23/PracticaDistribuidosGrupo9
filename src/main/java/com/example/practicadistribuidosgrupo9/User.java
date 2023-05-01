@@ -1,19 +1,35 @@
 package com.example.practicadistribuidosgrupo9;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String firstName;
     private String lastName;
     private String password;
 
     private String userName;
     private Boolean adminRole;
-    private Map<String, Order> ordersMap = new ConcurrentHashMap<>();
+
+    @Transient
     private CartService cart = new CartService();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
+
+    public User() {
+    }
 
 
     public User(String firstName, String lastName, String password, String userName) {
@@ -59,10 +75,11 @@ public class User {
         adminRole = true;
     }
     public void addOrder(Order order) {
-        this.ordersMap.put(order.getOrderID(), order);
+        this.orders.add(order);
     }
-    public Map<String, Order> getOrders() {
-        return ordersMap;
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public List<Product> getCartProducts(){

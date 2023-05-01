@@ -46,9 +46,15 @@ public class OrderController {
         // Store the order on the map
         User currentUser = userService.getUserByEmail(user);
         if (currentUser != null) {
-            currentUser.getOrders().get(o.get(ORDID).asText()).setReported(true);
-            OrderReport orderReport = new OrderReport(user, o.get(ORDID).asText(), o.get("reportMsg").asText());
-            orderReports.add(orderReport);
+            String orderId = o.get(ORDID).asText();
+            for (Order order : currentUser.getOrders()) {
+                if (order.getOrderID().equals(orderId)) {
+                    order.setReported(true);
+                    OrderReport orderReport = new OrderReport(user, orderId, o.get("reportMsg").asText());
+                    orderReports.add(orderReport);
+                    break;
+                }
+            }
         }
         // Return a response to the client
         return "Ok";

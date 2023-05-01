@@ -1,11 +1,22 @@
 package com.example.practicadistribuidosgrupo9;
 
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "customer_order")
 public class Order {
-    private List<Product> products;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String orderID;
+    private BigDecimal total;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private List<Product> products;
+
     private String cardNumber;
     private String cardHolder;
     private String expiryDate;
@@ -24,6 +35,36 @@ public class Order {
             this.products.add(p);
         }
 
+    }
+
+    public Order() {
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderID='" + orderID + '\'' +
+                ", total=" + total +
+                ", products=" + products +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", cardHolder='" + cardHolder + '\'' +
+                ", expiryDate='" + expiryDate + '\'' +
+                ", securityCode='" + securityCode + '\'' +
+                ", reported=" + reported +
+                '}';
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getOrderID() {
