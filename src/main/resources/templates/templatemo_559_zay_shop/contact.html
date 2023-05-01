@@ -15,7 +15,8 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-
+    <!--For rich text -->
+    <link rel="stylesheet" type="text/css" href="richText.css">
     <!-- Load map styles -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 
@@ -167,8 +168,10 @@
         <div th:if="${successMessage}" class="alert alert-success" role="alert">
             <p th:text="${successMessage}"></p>
         </div>
+
+
         <div class="row py-5">
-            <form class="col-md-9 m-auto" action="/responses/submit" method="post" role="form">
+            <form class="col-md-9 m-auto" action="/responses/submit" method="post" role="form" onsubmit="saveContent()">
             <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="name">Nombre</label>
@@ -183,9 +186,21 @@
                     <label for="subject">Asunto</label>
                     <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Asunto">
                 </div>
+                <!-- Añadir aqi texto enriquecido -->
                 <div class="mb-3">
-                    <label for="message">Mensaje</label>
-                    <textarea class="form-control mt-1" id="message" name="message" placeholder="Mensaje" rows="8"></textarea>
+                    <label for="editor">Mensaje</label>
+                    <div class="editor-container">
+                        <div class="form-control mt-1" id="editor" name="editor" contenteditable="true" style="min-height: 200px; overflow-y: scroll;"></div>
+                        <input type="hidden" id="message" name="message">
+                        <div class="button-container">
+                            <button type="button" onclick="format('bold')" class="format-button bold">Negrita</button>
+                            <button type="button" onclick="format('italic')" class="format-button italic">Cursiva</button>
+                            <button type="button" onclick="format('underline')" class="format-button">Subrayado</button>
+                            <button type="button" onclick="format('foreColor', 'red')" class="format-button red">Rojo</button>
+                            <button type="button" onclick="format('foreColor', 'blue')" class="format-button">Azul</button>
+                            <button type="button" onclick="format('removeFormat')">Borrar Formato</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col text-end mt-2">
@@ -193,6 +208,7 @@
                     </div>
                 </div>
             </form>
+            <script src="assets/js/bottonStyle.js"></script>
         </div>
     </div>
     <!-- End Contact -->
