@@ -1,5 +1,6 @@
 package com.example.practicadistribuidosgrupo9;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +14,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/responses")
 public class ResponseController {
-
-    private List<Response> responses = new ArrayList<>();
+    @Autowired
+    private ResponseRepository responseRepository;
 
     @PostMapping("/submit")
     public String submitResponse(Response response, RedirectAttributes redirectAttributes) {
-        responses.add(response);
+        responseRepository.save(response);
         redirectAttributes.addFlashAttribute("successMessage", "¡Mensaje enviado correctamente!");
         return "redirect:/contact";
     }
 
     @GetMapping
     public String viewResponses(Model model) {
+        List<Response> responses = responseRepository.findAll();
         model.addAttribute("responses", responses);
         return "responses";
     }
