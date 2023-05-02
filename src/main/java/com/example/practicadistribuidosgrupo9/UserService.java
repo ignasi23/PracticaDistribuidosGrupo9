@@ -4,7 +4,6 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,8 +15,8 @@ public class UserService {
     public void init() {
         User admin = new User("ADMIN", "ADMIN", "ADMIN", "ADMIN@GMAIL.COM");
         admin.setAdminRole();
-        Optional<User> existingUser = userRepository.findByUserName("ADMIN@GMAIL.COM");
-        if(!existingUser.isPresent()){
+        List<User> existingUser = userRepository.findByUserName("ADMIN@GMAIL.COM");
+        if (existingUser.isEmpty()) {
             userRepository.save(admin);
         }
     }
@@ -31,9 +30,9 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
-        Optional<User> userOptional = userRepository.findByUserName(email.toUpperCase());
-        if (userOptional.isPresent()) {
-            return userOptional.get();
+        List<User> userOptional = userRepository.findByUserName(email.toUpperCase());
+        if (!userOptional.isEmpty()) {
+            return userOptional.get(0);
         } else {
             // Lanza una excepción o devuelve un valor predeterminado
             throw new RuntimeException("User not found");

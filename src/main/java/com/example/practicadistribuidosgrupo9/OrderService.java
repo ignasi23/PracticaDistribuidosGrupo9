@@ -2,6 +2,7 @@ package com.example.practicadistribuidosgrupo9;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,19 +17,19 @@ public class OrderService {
     }
 
     public Order createOrder(String userEmail, Order order) {
-        User user = userRepository.findByUserName(userEmail).orElse(null);
-        if (user != null) {
+        List<User> users = userRepository.findByUserName(userEmail);
+        if (!users.isEmpty()) {
+            User user = users.get(0);
             order.setUser(user);
             user.addOrder(order);
-            //userRepository.save(user);
             return orderRepository.save(order);
         }
         return null;
     }
 
     public boolean reportOrder(String userEmail, String orderId, String reportMsg) {
-        Optional<User> optionalUser = userRepository.findByUserName(userEmail);
-        if (optionalUser.isPresent()) {
+        List<User> users = userRepository.findByUserName(userEmail);
+        if (!users.isEmpty()) {
             Optional<Order> optionalOrder = orderRepository.findByOrderID(orderId);
             if (optionalOrder.isPresent()) {
                 Order order = optionalOrder.get();
@@ -42,16 +43,16 @@ public class OrderService {
     }
 
     public Order getOrder(String userEmail, String orderId) {
-        Optional<User> optionalUser = userRepository.findByUserName(userEmail);
-        if (optionalUser.isPresent()) {
+        List<User> users = userRepository.findByUserName(userEmail);
+        if (!users.isEmpty()) {
             return orderRepository.findByOrderID(orderId).orElse(null);
         }
         return null;
     }
 
     public boolean deleteOrder(String userEmail, String orderId) {
-        Optional<User> optionalUser = userRepository.findByUserName(userEmail);
-        if (optionalUser.isPresent()) {
+        List<User> users = userRepository.findByUserName(userEmail);
+        if (!users.isEmpty()) {
             Optional<Order> optionalOrder = orderRepository.findByOrderID(orderId);
             if (optionalOrder.isPresent()) {
                 orderRepository.delete(optionalOrder.get());
