@@ -31,7 +31,7 @@ public class OrderController {
     public ResponseEntity<Order> createOrder(@CookieValue(name = "user", defaultValue = "") String user, @RequestBody JsonNode o) {
         // Store the order on the map
         User currentUser = userService.getUserByEmail(user);
-        List<Product> products = cartService.getProductosInCart(currentUser);
+        List<Product> products = cartService.getProductosInCartOrderByPriceAsc(currentUser);
         Order order = new Order(o.get(ORDID).asText(), o.get("cardNumber").asText(), o.get("cardHolder").asText(), o.get("expiryDate").asText(), o.get("securityCode").asText(), currentUser, products);
         if (currentUser != null) {
             //currentUser.addOrder(order);

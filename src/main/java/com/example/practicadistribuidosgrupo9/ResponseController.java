@@ -26,8 +26,9 @@ public class ResponseController {
 
     @GetMapping
     public String viewResponses(Model model) {
-        List<Response> responses = responseRepository.findAll();
+        List<Response> responses = responseRepository.findAllOrderedByName();
         model.addAttribute("responses", responses);
         return "responses";
     }
+
 }

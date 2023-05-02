@@ -45,9 +45,9 @@ public class CartService {
         }
     }
 
-    public List<Product> getProductosInCart(User user) {
+    public List<Product> getProductosInCartOrderByPriceAsc(User user) {
         List<Product> productsList = new ArrayList<>();
-        for(CartItem item : cartRepository.findByUser(user)){
+        for (CartItem item : cartRepository.findByUserOrderByProductPriceAsc(user)) {
             productsList.add(item.getProduct());
         }
         return productsList;
