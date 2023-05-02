@@ -24,8 +24,8 @@ public class User {
 
     /*@Transient
     private CartService cart = new CartService();*/
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Product> cart = new ArrayList<>();
+    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CartItem> cart = new ArrayList<>();*/
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
@@ -102,9 +102,9 @@ public class User {
         cart.addAlCart(title, price, image, quantity);
     }*/
 
-    public List<Product> getCart(){
+    /*public List<CartItem> getCart(){
         return cart;
-    }
+    }*/
 
 
 }

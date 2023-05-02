@@ -26,6 +26,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderRepository orderRepository;
     public static final String REDIR = "redirect:/login";
 
     @GetMapping("/login")
@@ -95,7 +98,7 @@ public class UserController {
             model.addAttribute("firstName", currentUser.getFirstName());
             model.addAttribute("lastName", currentUser.getLastName());
             model.addAttribute("userEmail", user);
-            model.addAttribute("userOrders", currentUser.getOrders());
+            model.addAttribute("userOrders", orderRepository.findByUser(currentUser));
             if (currentUser.getAdminRole()) {
                 model.addAttribute("adminRole", true);
                 //model.addAttribute("reports", OrderController.orderReports);

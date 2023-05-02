@@ -21,7 +21,7 @@ public class CartController {
     @GetMapping("/cart")
     public String cart (Model model, @CookieValue(name = "user", defaultValue = "") String user) {
         Optional<User> userOptional = userRepository.findByUserName(user.toUpperCase());
-        model.addAttribute("productos", cartService.getProductsInCart(userOptional.get()));
+        model.addAttribute("productos", cartService.getProductosInCart(userOptional.get()));
         model.addAttribute("total", cartService.getTotal(userOptional.get()));
         return "cart";
     }
@@ -38,7 +38,7 @@ public class CartController {
             return "redirect:/login?error=true";
         }
         if (submit.equals("addtocard")) {
-            //cartService.addAlCart(title, new BigDecimal(price), image, quantity);
+            //cartService.addAlCart(title, new BigDecimal(price), image, quantity);///////////////
             cartService.addAlCart(title, new BigDecimal(price), image, quantity, userOptional.get());
         }
         return "redirect:/cart";
@@ -47,7 +47,6 @@ public class CartController {
     @DeleteMapping("/cart/{index}")
     @ResponseBody
     public ResponseEntity<Void> removeFromCart(@PathVariable("index") int index, @CookieValue(name = "user", defaultValue = "") String user) {
-        //cartService.deleteFromCart(index);
         Optional<User> userOptional = userRepository.findByUserName(user.toUpperCase());
         cartService.deleteFromCart(index, userOptional.get());
         return ResponseEntity.noContent().build();

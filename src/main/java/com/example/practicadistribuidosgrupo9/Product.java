@@ -45,6 +45,11 @@ public class Product {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
 }
 
 

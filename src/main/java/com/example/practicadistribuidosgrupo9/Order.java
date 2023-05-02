@@ -22,9 +22,11 @@ public class Order {
     private String expiryDate;
     private String securityCode;
     private boolean reported = false;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-
-    public Order(String orderID, String cardNumber, String cardHolder, String expiryDate, String securityCode, List<Product> products) {
+    public Order(String orderID, String cardNumber, String cardHolder, String expiryDate, String securityCode, User user, List<Product> products) {
         this.orderID = orderID;
         this.cardNumber = cardNumber;
         this.cardHolder = cardHolder;
@@ -32,9 +34,13 @@ public class Order {
         this.securityCode = securityCode;
         this.products = new ArrayList<>();
         for(Product p : products){
+            p.setOrder(this);
             this.products.add(p);
         }
-
+        this.total = products.stream()
+                .map(Product::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        this.user = user;
     }
 
     public Order() {
@@ -54,10 +60,6 @@ public class Order {
                 ", reported=" + reported +
                 '}';
     }
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     public User getUser() {
         return user;

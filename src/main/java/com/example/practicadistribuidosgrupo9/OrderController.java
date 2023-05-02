@@ -1,10 +1,6 @@
 package com.example.practicadistribuidosgrupo9;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +18,8 @@ public class OrderController {
     private UserService userService;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private OrderRepository orderRepository;
 
     public static List<OrderReport> orderReports;
 
@@ -33,10 +31,11 @@ public class OrderController {
     public ResponseEntity<Order> createOrder(@CookieValue(name = "user", defaultValue = "") String user, @RequestBody JsonNode o) {
         // Store the order on the map
         User currentUser = userService.getUserByEmail(user);
-        List<Product> products = cartService.getProductsInCart(currentUser);
-        Order order = new Order(o.get(ORDID).asText(), o.get("cardNumber").asText(), o.get("cardHolder").asText(), o.get("expiryDate").asText(), o.get("securityCode").asText(), products);
+        List<Product> products = cartService.getProductosInCart(currentUser);
+        Order order = new Order(o.get(ORDID).asText(), o.get("cardNumber").asText(), o.get("cardHolder").asText(), o.get("expiryDate").asText(), o.get("securityCode").asText(), currentUser, products);
         if (currentUser != null) {
-            currentUser.addOrder(order);
+            //currentUser.addOrder(order);
+            orderRepository.save(order);
             cartService.deleteTodoCart(currentUser);
         }
         // Return a response to the client

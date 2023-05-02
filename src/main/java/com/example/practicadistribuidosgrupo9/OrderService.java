@@ -20,7 +20,7 @@ public class OrderService {
         if (user != null) {
             order.setUser(user);
             user.addOrder(order);
-            userRepository.save(user);
+            //userRepository.save(user);
             return orderRepository.save(order);
         }
         return null;
