@@ -69,10 +69,10 @@
 
           <table class="table table-light">
             <tbody>
-            <tr th:each="product: ${order.value.products}">
-              <td> <img th:src="${product.image}" alt="Imagen del producto" width="50" height="50"></td>
-              <td th:text="${product.title}"></td>
-              <td th:text="${product.price}"></td>
+            <tr th:each="product: ${orders.value.products}">
+              <td> <img th:src="${products.image}" alt="Imagen del producto" width="50" height="50"></td>
+              <td th:text="${products.title}"></td>
+              <td th:text="${products.price}"></td>
             </tr>
             </tbody>
           </table>

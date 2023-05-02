@@ -39,7 +39,7 @@ CREATE TABLE response (
 
 INSERT INTO users (first_name, last_name, password, user_name, admin_role)
 VALUES ('John', 'Doe', 'password123', 'john_doe', FALSE),
-       ('Jane', 'Smith', 'password456', 'jane_smith', TRUE);
+       ('Jane', 'Smith', 'password456', 'jane_smith', FALSE);
 
 INSERT INTO customer_order (user_id, order_id, total, card_number, card_holder, expiry_date, security_code, reported)
 VALUES (1, 'ORD001', 100.00, '1234567812345678', 'John Doe', '12/25', '123', FALSE),

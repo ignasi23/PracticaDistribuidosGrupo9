@@ -100,7 +100,6 @@ public class UserController {
                 model.addAttribute("adminRole", true);
                 //model.addAttribute("reports", OrderController.orderReports);
             }
-
             return "profile";
         }
     }

@@ -13,6 +13,10 @@ public class Product {
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private String title;
     private BigDecimal price;
     private String image;

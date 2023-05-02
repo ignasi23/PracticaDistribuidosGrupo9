@@ -16,7 +16,10 @@ public class UserService {
     public void init() {
         User admin = new User("ADMIN", "ADMIN", "ADMIN", "ADMIN@GMAIL.COM");
         admin.setAdminRole();
-        userRepository.save(admin);
+        Optional<User> existingUser = userRepository.findByUserName("ADMIN@GMAIL.COM");
+        if(!existingUser.isPresent()){
+            userRepository.save(admin);
+        }
     }
 
     public void updateUser(User updatedUser) {

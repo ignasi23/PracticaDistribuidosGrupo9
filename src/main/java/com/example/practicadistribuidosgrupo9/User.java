@@ -22,8 +22,10 @@ public class User {
     private String userName;
     private Boolean adminRole;
 
-    @Transient
-    private CartService cart = new CartService();
+    /*@Transient
+    private CartService cart = new CartService();*/
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Product> cart = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
@@ -82,9 +84,11 @@ public class User {
         return orders;
     }
 
-    public List<Product> getCartProducts(){
+/*    public List<Product> getCartProducts(){
         return cart.getProductsInCart();
     }
+
+    public BigDecimal getTotal(){return cart.getTotal();};
 
     public void deleteTodoCart(){
         cart.deleteTodoCart();
@@ -96,6 +100,10 @@ public class User {
 
     public void addAlCart(String title, BigDecimal price, String image, int quantity) {
         cart.addAlCart(title, price, image, quantity);
+    }*/
+
+    public List<Product> getCart(){
+        return cart;
     }
 
 
