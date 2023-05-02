@@ -25,8 +25,8 @@ public class UserService {
         userRepository.save(updatedUser);
     }
 
-    public void deleteUser(String email) {
-        userRepository.deleteByUserName(email.toUpperCase());
+    public void deleteUser(User user) {
+        userRepository.delete(user);
     }
 
     public User getUserByEmail(String email) {
@@ -51,5 +51,3 @@ public class UserService {
         return userRepository.findAll();
     }
 }
-
-

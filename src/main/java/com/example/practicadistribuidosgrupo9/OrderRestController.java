@@ -12,7 +12,7 @@ public class OrderRestController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("V2/orders")
+            @PostMapping("V2/orders")
     public ResponseEntity<String> createOrder(@CookieValue(name = "user", defaultValue = "") String userEmail, @RequestBody Order order) {
         Order createdOrder = orderService.createOrder(userEmail, order);
         if (createdOrder != null) {

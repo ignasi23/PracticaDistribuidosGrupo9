@@ -1,87 +1,133 @@
 package com.example.practicadistribuidosgrupo9;
-
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.http.MediaType;
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api")
 public class UserRestController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> registerUser(@RequestParam("firstName") String firstName,
-                                                            @RequestParam("lastName") String lastName,
-                                                            @RequestParam("password") String password,
-                                                            @RequestParam("userName") String userName) {
-        User existingUser = userService.getUserByEmail(userName);
-        if (existingUser != null) {
-            return ResponseEntity.badRequest().build();
-        }
-        User newUser = new User(firstName, lastName, password, userName);
-        userService.addUser(newUser);
+    @Autowired
+    private OrderRepository orderRepository;
+    public static final String REDIR = "redirect:/login";
 
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "User registered successfully.");
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> loginUser(@RequestParam("userName") String userName,
-                                                         @RequestParam("password") String password) {
-        User user = userService.getUserByEmail(userName);
+            @PostMapping("/authenticate")
+    public String authenticate(@RequestParam String email, @RequestParam String password, HttpSession session, HttpServletResponse response) {
+        User user = userService.getUserByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "User logged in successfully.");
-            return ResponseEntity.ok(response);
+            session.setAttribute("user", email.toUpperCase());
+            //cookie
+            Cookie sessionCookie = new Cookie("user", email);
+            sessionCookie.setMaxAge(60 * 60 * 24); // 1 day
+            response.addCookie(sessionCookie);
+            return "redirect:/?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName();
+        } else {
+            return "redirect:/login?error=true";
         }
-        return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/{userName}")
-    public ResponseEntity<User> getUser(@PathVariable("userName") String userName) {
-        User user = userService.getUserByEmail(userName);
-        if (user != null) {
-            return ResponseEntity.ok(user);
-        }
-        return ResponseEntity.notFound().build();
+    @PostMapping("/logout")
+    public String logout(HttpSession session, HttpServletResponse response) {
+        // invalidate the session
+        session.invalidate();
+        // Delete the cookie
+        Cookie sessionCookie = new Cookie("user", "");
+        sessionCookie.setMaxAge(0);
+        response.addCookie(sessionCookie);
+        return REDIR;
     }
 
-    @PutMapping("/{userName}")
-    public ResponseEntity<Map<String, String>> updateUser(@PathVariable("userName") String userName,
-                                                          @RequestParam("firstName") String firstName,
-                                                          @RequestParam("lastName") String lastName,
-                                                          @RequestParam("password") String password) {
-        User user = userService.getUserByEmail(userName);
-        if (user != null) {
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPassword(password);
-            userService.updateUser(user);
-
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "User updated successfully.");
-            return ResponseEntity.ok(response);
+    @PostMapping("/register")
+    public String register(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, HttpSession session) {
+        String userName = email.toUpperCase();
+        if (!userService.userExists(userName)) {
+            userService.addUser(new User(firstName, lastName, password, userName));
+            session.setAttribute("user", userName);
+            return REDIR;
+        } else {
+            return "redirect:/login?registerError=true";
         }
-        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{userName}")
-    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable("userName") String userName) {
-        User user = userService.getUserByEmail(userName);
-        if (user != null) {
-            userService.deleteUser(userName);
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "User deleted successfully.");
-            return ResponseEntity.ok(response);
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getUsers() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(userService.getAllUsers());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "{\"error\": \"Error al procesar el JSON\"}";
         }
-        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/verify")
+    public String verify(@CookieValue(name = "user", defaultValue = "") String user) {
+        if (user.isEmpty() || !userService.userExists(user.toUpperCase())) {
+            return REDIR;
+        } else {
+            return "profile";
+        }
+    }
+
+    @GetMapping("/get_reports")
+    public String getReports() throws JsonProcessingException {
+        List<OrderReport> Reports = OrderController.orderReports;
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode rootNode = mapper.createObjectNode();
+        ArrayNode arrayMatches = rootNode.putArray("arrayMatches");
+        for (OrderReport r : Reports) {
+            List<Object> o = new ArrayList<>();
+            o.add(r.getUserName());
+            o.add(r.getOrderID());
+            o.add(r.getReportMsg());
+            JsonNode j = mapper.convertValue(o, JsonNode.class);
+            arrayMatches.add(j);
+        }
+        String json = mapper.writeValueAsString(rootNode);
+        return json;
+    }
+    @GetMapping("/users/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        User user = userService.getUserByEmail(username.toUpperCase());
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
+    }
+    @DeleteMapping("/users/{username}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String username) {
+        User user = userService.getUserByEmail(username.toUpperCase());
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        userService.deleteUser(user);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/users/{username}")
+    public ResponseEntity<User> updateUser(@PathVariable String username, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String password) {
+        User user = userService.getUserByEmail(username.toUpperCase());
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPassword(password);
+        userService.updateUser(user);
+        return ResponseEntity.ok(user);
     }
 }
-
