@@ -1,5 +1,7 @@
 package com.example.practicadistribuidosgrupo9;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -16,29 +18,29 @@ public class CartRestController {
     private UserRepository userRepository;
 
     @GetMapping
-    public List<Product> getCart(@CookieValue(name = "user", defaultValue = "") String user) {
+    public ResponseEntity<List<Product>> getCart(@CookieValue(name = "user", defaultValue = "") String user) {
         List<User> users = userRepository.findByUserName(user.toUpperCase());
         if (users.isEmpty()) {
-            return null;
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
-        return cartService.getProductosInCartOrderByPriceAsc(users.get(0));
+        return ResponseEntity.ok(cartService.getProductosInCartOrderByPriceAsc(users.get(0)));
     }
 
     @PostMapping
-    public String addToCart(@RequestParam("product-title") String title,
-                            @RequestParam("product-price") String price,
-                            @RequestParam("product-quanity") int quantity,
-                            @RequestParam("product-image") String image,
-                            @RequestParam("submit") String submit,
-                            @CookieValue(name = "user", defaultValue = "") String user) {
+    public ResponseEntity<String> addToCart(@RequestParam("product-title") String title,
+                                            @RequestParam("product-price") String price,
+                                            @RequestParam("product-quanity") int quantity,
+                                            @RequestParam("product-image") String image,
+                                            @RequestParam("submit") String submit,
+                                            @CookieValue(name = "user", defaultValue = "") String user) {
         List<User> users = userRepository.findByUserName(user.toUpperCase());
         if (users.isEmpty()) {
-            return "redirect:/login?error=true";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
         if (submit.equals("addtocard")) {
             cartService.addAlCart(title, new BigDecimal(price), image, quantity, users.get(0));
         }
-        return "redirect:/cart";
+        return ResponseEntity.status(HttpStatus.CREATED).body("Producto agregado al carrito");
     }
 
     @DeleteMapping("/{index}")
@@ -46,7 +48,8 @@ public class CartRestController {
         List<User> users = userRepository.findByUserName(user.toUpperCase());
         if (!users.isEmpty()) {
             cartService.deleteFromCart(index, users.get(0));
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 }

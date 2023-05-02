@@ -25,7 +25,7 @@ public class UserRestController {
     private OrderRepository orderRepository;
     public static final String REDIR = "redirect:/login";
 
-            @PostMapping("/authenticate")
+    @PostMapping("/authenticate")
     public String authenticate(@RequestParam String email, @RequestParam String password, HttpSession session, HttpServletResponse response) {
         User user = userService.getUserByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
@@ -100,6 +100,7 @@ public class UserRestController {
         String json = mapper.writeValueAsString(rootNode);
         return json;
     }
+
     @GetMapping("/users/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
         User user = userService.getUserByEmail(username.toUpperCase());
@@ -108,6 +109,7 @@ public class UserRestController {
         }
         return ResponseEntity.ok(user);
     }
+
     @DeleteMapping("/users/{username}")
     public ResponseEntity<Void> deleteUser(@PathVariable String username) {
         User user = userService.getUserByEmail(username.toUpperCase());
@@ -117,6 +119,7 @@ public class UserRestController {
         userService.deleteUser(user);
         return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/users/{username}")
     public ResponseEntity<User> updateUser(@PathVariable String username, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String password) {
         User user = userService.getUserByEmail(username.toUpperCase());
