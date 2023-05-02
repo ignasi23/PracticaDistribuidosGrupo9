@@ -22,17 +22,18 @@ public class User {
     private String userName;
     private Boolean adminRole;
 
-    /*@Transient
-    private CartService cart = new CartService();*/
-    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<CartItem> cart = new ArrayList<>();*/
+    @ManyToMany
+    @JoinTable(
+            name = "user_products",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> products = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
-
 
     public User(String firstName, String lastName, String password, String userName) {
         this.firstName = firstName;
@@ -73,9 +74,11 @@ public class User {
     public Boolean getAdminRole() {
         return adminRole;
     }
+
     public void setAdminRole() {
         adminRole = true;
     }
+
     public void addOrder(Order order) {
         this.orders.add(order);
     }
@@ -83,6 +86,16 @@ public class User {
     public List<Order> getOrders() {
         return orders;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void addProduct(Product product) {
+        this.products.add(product);
+        product.setUser(this);
+    }
+}
 
 /*    public List<Product> getCartProducts(){
         return cart.getProductsInCart();
@@ -105,7 +118,4 @@ public class User {
     /*public List<CartItem> getCart(){
         return cart;
     }*/
-
-
-}
 

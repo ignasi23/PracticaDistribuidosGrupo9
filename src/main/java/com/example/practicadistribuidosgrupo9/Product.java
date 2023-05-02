@@ -50,6 +50,9 @@ public class Product {
         this.order = order;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 
 
